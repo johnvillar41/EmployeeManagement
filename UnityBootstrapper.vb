@@ -52,7 +52,6 @@ Public NotInheritable Class UnityBootstrapper
 
 	Private Shared Function BuildUnityContainer() As IUnityContainer
 		Dim container = New UnityContainer()
-		container.RegisterType(GetType(IRepository(Of EmployeeModel)), GetType(Repository(Of EmployeeModel)))
 		container.RegisterType(Of IEmployeeService, EmployeeService)
 		Return container
 	End Function

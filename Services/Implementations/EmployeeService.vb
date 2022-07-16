@@ -3,15 +3,17 @@ Imports System.Threading.Tasks
 Imports Dapper
 
 Public Class EmployeeService
+    Inherits Repository(Of EmployeeModel)
     Implements IEmployeeService
 
-    Private ReadOnly _repository As IRepository(Of EmployeeModel)
-    Public Sub New(repository As IRepository(Of EmployeeModel))
-        _repository = repository
-    End Sub
+    Public Overrides ReadOnly Property GetTableName As String
+        Get
+            Return "EmployeeTable"
+        End Get
+    End Property
+
     Public Async Function CreateNewEmployeeAsync(employee As EmployeeModel) As Task Implements IEmployeeService.CreateNewEmployeeAsync
-        Await _repository.AddAsync(employee, "INSERT INTO EmployeeTable(Name, Age, Salary, Address, BirthDate, IsActive)
-        VALUES(@Name, @Age, @Salary, @Address, @BirthDate, @IsActive)")
+        Await AddAsync(employee, "EmployeeTable")
     End Function
 
     Public Async Function ViewAllEmployeesAsync() As Task(Of IEnumerable(Of EmployeeModel)) Implements IEmployeeService.ViewAllEmployeesAsync

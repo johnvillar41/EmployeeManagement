@@ -7,17 +7,19 @@ Public Interface IRepository(Of T)
         IFetchAllRepository(Of T),
         IDeleteRepository(Of T)
 
+
+
 End Interface
 Public Interface IAddRepository(Of T)
-    Function AddAsync(dataObject As T, sqlQuery As String) As Task
+    Function AddAsync(dataObject As T) As Task
 End Interface
 
 Public Interface IUpdateRepository(Of T)
-    Function UpdateAsync(dataObject As T, sqlQuery As String) As Task
+    Function UpdateAsync(dataObject As T) As Task
 End Interface
 
 Public Interface IFindByIdRepository(Of T)
-    Function FindByIdAsync(id As Integer, tableName As String) As Task(Of T)
+    Function FindByIdAsync(id As Integer) As Task(Of T)
 End Interface
 
 Public Interface IFetchAllRepository(Of T)
@@ -25,5 +27,5 @@ Public Interface IFetchAllRepository(Of T)
 End Interface
 
 Public Interface IDeleteRepository(Of T)
-    Function DeleteAsync(id As Integer, tableName As String) As Task
+    Function DeleteAsync(id As Integer) As Task
 End Interface
