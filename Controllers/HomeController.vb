@@ -14,7 +14,7 @@ Public Class HomeController
     End Function
 
     Async Function Delete(employeeId As Integer) As Task(Of ActionResult)
-        Await _employeeService.DeleteAsync(employeeId)
+        Await _employeeService.DeleteEmployeeAsync(employeeId)
         Return RedirectToAction(NameOf(Index))
     End Function
 

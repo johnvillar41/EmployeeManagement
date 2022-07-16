@@ -23,7 +23,7 @@ Public Interface IFindByIdRepository(Of T)
 End Interface
 
 Public Interface IFetchAllRepository(Of T)
-    Function FetchAllAsync(tableName As String) As Task(Of IEnumerable(Of T))
+    Function FetchAllAsync() As Task(Of IEnumerable(Of T))
 End Interface
 
 Public Interface IDeleteRepository(Of T)

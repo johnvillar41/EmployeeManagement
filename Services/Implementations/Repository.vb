@@ -32,8 +32,8 @@ Public MustInherit Class Repository(Of T)
         Await _db.ExecuteAsync("DELETE FROM " & GetTableName() & " WHERE Id = @id", New With {id})
     End Function
 
-    Public Async Function FetchAllAsync(tableName As String) As Task(Of IEnumerable(Of T)) Implements IFetchAllRepository(Of T).FetchAllAsync
-        Return Await _db.QueryAsync(Of T)("SELECT * FROM " & tableName)
+    Public Async Function FetchAllAsync() As Task(Of IEnumerable(Of T)) Implements IFetchAllRepository(Of T).FetchAllAsync
+        Return Await _db.QueryAsync(Of T)("SELECT * FROM " & GetTableName())
     End Function
 
     Public Async Function UpdateAsync(dataObject As T) As Task Implements IUpdateRepository(Of T).UpdateAsync
