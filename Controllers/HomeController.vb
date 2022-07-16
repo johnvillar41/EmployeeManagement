@@ -13,4 +13,12 @@ Public Class HomeController
         Return View(employees)
     End Function
 
+    Async Function Delete(employeeId As Integer) As Task(Of ActionResult)
+        Await _employeeService.DeleteEmployeeAsync(employeeId)
+        Return RedirectToAction(NameOf(Index))
+    End Function
+
+    Function CreateForm() As ActionResult
+        Return View("CreateForm")
+    End Function
 End Class
