@@ -6,27 +6,22 @@ Public Class EmployeeService
     Implements IEmployeeService
 
     Private ReadOnly _db As IDbConnection
-    Private Shared _instance As EmployeeService
-
-    Public Shared ReadOnly Property Instance() As EmployeeService
-        Get
-            If (_instance Is Nothing) Then
-                _instance = New EmployeeService()
-            End If
-
-            Return _instance
-        End Get
-
-    End Property
-    Private Sub New()
+    Public Sub New()
         _db = New SqlConnection(ConfigurationManager.ConnectionStrings("EmployeeDBConnection").ConnectionString)
     End Sub
-    Public Function AddNewEmployeeAsync(employee As EmployeeModel) As Task Implements IEmployeeService.AddNewEmployeeAsync
-        Throw New NotImplementedException()
+    Public Async Function AddNewEmployeeAsync(employee As EmployeeModel) As Task Implements IEmployeeService.AddNewEmployeeAsync
+        Await _db.ExecuteAsync("INSERT INTO EmployeeTable(Name, Age, Salary, Address, BirthDate, IsActive)
+        VALUES(@Name, @Age, @Salary, @Address, @BirthDate, @IsActive)", New With {
+            .Name = employee.Name,
+            .Age = employee.Age,
+            .Address = employee.Address,
+            .BirthDate = employee.BirthDate,
+            .IsActive = employee.IsActive
+        })
     End Function
 
-    Public Function DeleteEmployeeAsync(employeeId As Integer) As Task Implements IEmployeeService.DeleteEmployeeAsync
-        Throw New NotImplementedException()
+    Public Async Function DeleteEmployeeAsync(employeeId As Integer) As Task Implements IEmployeeService.DeleteEmployeeAsync
+        Await _db.ExecuteAsync("DELETE FROM EmployeeTable WHERE Id = @Id", New With {.Id = employeeId})
     End Function
 
     Public Function UpdateEmployeeAsync(employeeId As Integer, employee As EmployeeModel) As Task Implements IEmployeeService.UpdateEmployeeAsync
