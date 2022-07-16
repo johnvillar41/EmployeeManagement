@@ -9,31 +9,39 @@ Public Class EmployeeService
     Public Sub New()
         _db = New SqlConnection(ConfigurationManager.ConnectionStrings("EmployeeDBConnection").ConnectionString)
     End Sub
-    Public Async Function AddNewEmployeeAsync(employee As EmployeeModel) As Task Implements IEmployeeService.AddNewEmployeeAsync
+    Public Async Function AddAsync(dataObject As EmployeeModel) As Task Implements IAddRepository(Of EmployeeModel).AddAsync
         Await _db.ExecuteAsync("INSERT INTO EmployeeTable(Name, Age, Salary, Address, BirthDate, IsActive)
         VALUES(@Name, @Age, @Salary, @Address, @BirthDate, @IsActive)", New With {
-            .Name = employee.Name,
-            .Age = employee.Age,
-            .Salary = employee.Salary,
-            .Address = employee.Address,
-            .BirthDate = employee.BirthDate,
-            .IsActive = employee.IsActive
+            .Name = dataObject.Name,
+            .Age = dataObject.Age,
+            .Salary = dataObject.Salary,
+            .Address = dataObject.Address,
+            .BirthDate = dataObject.BirthDate,
+            .IsActive = dataObject.IsActive
         })
     End Function
 
-    Public Async Function DeleteEmployeeAsync(employeeId As Integer) As Task Implements IEmployeeService.DeleteEmployeeAsync
-        Await _db.ExecuteAsync("DELETE FROM EmployeeTable WHERE Id = @Id", New With {.Id = employeeId})
+    Public Async Function FindByIdAsync(id As Integer) As Task(Of EmployeeModel) Implements IFindByIdRepository(Of EmployeeModel).FindByIdAsync
+        Return Await _db.QueryFirstOrDefaultAsync(Of EmployeeModel)("SELECT * FROM EmployeeTable WHERE Id = @Id", New With {.Id = id})
     End Function
 
-    Public Function UpdateEmployeeAsync(employeeId As Integer, employee As EmployeeModel) As Task Implements IEmployeeService.UpdateEmployeeAsync
-        Throw New NotImplementedException()
-    End Function
-
-    Public Async Function ViewAllEmployeesAsync() As Task(Of IEnumerable(Of EmployeeModel)) Implements IEmployeeService.ViewAllEmployeesAsync
+    Public Async Function FetchAllAsync() As Task(Of IEnumerable(Of EmployeeModel)) Implements IFetchAllRepository(Of EmployeeModel).FetchAllAsync
         Return Await _db.QueryAsync(Of EmployeeModel)("SELECT * FROM EmployeeTable")
     End Function
 
-    Public Async Function FindEmployeeAsync(employeeId As Integer) As Task(Of EmployeeModel) Implements IEmployeeService.FindEmployeeAsync
-        Return Await _db.QueryFirstOrDefaultAsync(Of EmployeeModel)("SELECT * FROM EmployeeTable WHERE Id = @Id", New With {.Id = employeeId})
+    Public Async Function UpdateAsync(dataObject As EmployeeModel, id As Integer) As Task Implements IUpdateRepository(Of EmployeeModel).UpdateAsync
+        Await _db.ExecuteAsync("UPDATE EmployeeTable SET Name = @Name, Age = @Age, Salary = @Salary, Address = @Address, BirthDate = @BirthDate,
+        IsActive = @IsActive", New With {
+            .Name = dataObject.Name,
+            .Age = dataObject.Age,
+            .Salary = dataObject.Salary,
+            .Address = dataObject.Address,
+            .BirthDate = dataObject.BirthDate,
+            .IsActive = dataObject.IsActive
+        })
+    End Function
+
+    Public Async Function DeleteAsync(id As Integer) As Task Implements IDeleteRepository(Of EmployeeModel).DeleteAsync
+        Await _db.ExecuteAsync("DELETE FROM EmployeeTable WHERE Id = @Id", New With {.Id = id})
     End Function
 End Class
