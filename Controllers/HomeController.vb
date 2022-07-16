@@ -3,9 +3,9 @@
 Public Class HomeController
     Inherits System.Web.Mvc.Controller
 
-    Private _employeeService As IEmployeeService
-    Public Sub New(employeeService As IEmployeeService)
-        _employeeService = employeeService
+    Private ReadOnly _employeeService As IEmployeeService
+    Public Sub New()
+        _employeeService = EmployeeService.Instance
     End Sub
 
     Async Function Index() As Task(Of ActionResult)
