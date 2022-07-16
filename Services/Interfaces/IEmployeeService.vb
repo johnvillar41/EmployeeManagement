@@ -1,9 +1,8 @@
 ﻿Imports System.Threading.Tasks
 
 Public Interface IEmployeeService
-    Inherits IAddRepository(Of EmployeeModel),
-        IUpdateRepository(Of EmployeeModel),
-        IFindByIdRepository(Of EmployeeModel),
-        IFetchAllRepository(Of EmployeeModel),
-        IDeleteRepository(Of EmployeeModel)
+    Function CreateNewEmployeeAsync(employee As EmployeeModel) As Task
+    Function ViewAllEmployeesAsync() As Task(Of IEnumerable(Of EmployeeModel))
+    Function FindEmployeeAsync(id As Integer) As Task(Of EmployeeModel)
+    Function DeleteAsync(id As Integer) As Task
 End Interface

@@ -20,7 +20,7 @@ Public Class HomeController
 
     Async Function Create(employee As EmployeeModel) As Task(Of ActionResult)
         If ModelState.IsValid Then
-            Await _employeeService.AddNewEmployeeAsync(employee)
+            Await _employeeService.CreateNewEmployeeAsync(employee)
             Return RedirectToAction(NameOf(Index))
         End If
 
