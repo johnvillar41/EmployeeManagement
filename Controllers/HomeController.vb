@@ -18,6 +18,10 @@ Public Class HomeController
         Return RedirectToAction(NameOf(Index))
     End Function
 
+    Async Function Create(employee As EmployeeModel) As Task(Of ActionResult)
+        Await _employeeService.AddNewEmployeeAsync(employee)
+        Return RedirectToAction(NameOf(Index))
+    End Function
     Function CreateForm() As ActionResult
         Return View("CreateForm")
     End Function

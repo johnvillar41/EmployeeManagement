@@ -1,7 +1,7 @@
 ﻿@ModelType EmployeeManagement.EmployeeModel
 <div class="jumbotron shadow-sm">
     <div class="container">
-        @Using (Html.BeginForm())
+        @Using (Html.BeginForm("Create", "Home", FormMethod.Post))
             @Html.AntiForgeryToken()
 
             @<div class="form-horizontal">
@@ -71,6 +71,6 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@Section Scripts 
+@Section Scripts
     @Scripts.Render("~/bundles/jqueryval")
 End Section

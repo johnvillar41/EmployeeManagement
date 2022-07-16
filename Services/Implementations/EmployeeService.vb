@@ -14,6 +14,7 @@ Public Class EmployeeService
         VALUES(@Name, @Age, @Salary, @Address, @BirthDate, @IsActive)", New With {
             .Name = employee.Name,
             .Age = employee.Age,
+            .Salary = employee.Salary,
             .Address = employee.Address,
             .BirthDate = employee.BirthDate,
             .IsActive = employee.IsActive
