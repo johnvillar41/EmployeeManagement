@@ -15,8 +15,8 @@ Public MustInherit Class Repository(Of T)
 
     Public Async Function AddAsync(dataObject As T) As Task Implements IAddRepository(Of T).AddAsync
         Dim tupleValue = BuildInsertQueryString(dataObject)
-        Dim valueString = tupleValue.Item1
-        Dim tableString = tupleValue.Item2
+        Dim tableString = tupleValue.Item1
+        Dim valueString = tupleValue.Item2
 
         Dim sqlString As String = "INSERT INTO " & GetTableName & "(" & tableString & ")
         VALUES(" & valueString & ")"
