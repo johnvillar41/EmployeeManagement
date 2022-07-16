@@ -32,4 +32,8 @@ Public Class EmployeeService
     Public Async Function ViewAllEmployeesAsync() As Task(Of IEnumerable(Of EmployeeModel)) Implements IEmployeeService.ViewAllEmployeesAsync
         Return Await _db.QueryAsync(Of EmployeeModel)("SELECT * FROM EmployeeTable")
     End Function
+
+    Public Async Function FindEmployeeAsync(employeeId As Integer) As Task(Of EmployeeModel) Implements IEmployeeService.FindEmployeeAsync
+        Return Await _db.QueryFirstOrDefaultAsync(Of EmployeeModel)("SELECT * FROM EmployeeTable WHERE Id = @Id", New With {.Id = employeeId})
+    End Function
 End Class

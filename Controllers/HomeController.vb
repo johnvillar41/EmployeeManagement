@@ -19,10 +19,20 @@ Public Class HomeController
     End Function
 
     Async Function Create(employee As EmployeeModel) As Task(Of ActionResult)
-        Await _employeeService.AddNewEmployeeAsync(employee)
-        Return RedirectToAction(NameOf(Index))
+        If ModelState.IsValid Then
+            Await _employeeService.AddNewEmployeeAsync(employee)
+            Return RedirectToAction(NameOf(Index))
+        End If
+
+        Return RedirectToAction(NameOf(CreateForm))
     End Function
+
     Function CreateForm() As ActionResult
-        Return View("CreateForm")
+        Return View(NameOf(CreateForm))
+    End Function
+
+    Async Function Detail(employeeId As Integer) As Task(Of ActionResult)
+        Dim employeeDetail As EmployeeModel = Await _employeeService.FindEmployeeAsync(employeeId)
+        Return View(NameOf(Detail), employeeDetail)
     End Function
 End Class
