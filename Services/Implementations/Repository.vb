@@ -11,35 +11,35 @@ Public MustInherit Class Repository(Of T)
         _db = New SqlConnection(ConfigurationManager.ConnectionStrings("EmployeeDBConnection").ConnectionString)
     End Sub
 
-    Public MustOverride ReadOnly Property GetTableName() As String
+    Public MustOverride ReadOnly Property GetTableName As String
 
     Public Async Function AddAsync(dataObject As T) As Task Implements IAddRepository(Of T).AddAsync
         Dim tupleValue = BuildInsertQueryString(dataObject)
         Dim valueString = tupleValue.Item1
         Dim tableString = tupleValue.Item2
 
-        Dim sqlString As String = "INSERT INTO " & GetTableName() & "(" & tableString & ")
+        Dim sqlString As String = "INSERT INTO " & GetTableName & "(" & tableString & ")
         VALUES(" & valueString & ")"
 
         Await _db.ExecuteAsync(sqlString, dataObject)
     End Function
 
     Public Async Function FindByIdAsync(id As Integer) As Task(Of T) Implements IFindByIdRepository(Of T).FindByIdAsync
-        Return Await _db.QueryFirstOrDefaultAsync(Of T)("SELECT * FROM " & GetTableName() & " WHERE Id = @id", New With {id})
+        Return Await _db.QueryFirstOrDefaultAsync(Of T)("SELECT * FROM " & GetTableName & " WHERE Id = @id", New With {id})
     End Function
 
     Public Async Function DeleteAsync(id As Integer) As Task Implements IDeleteRepository(Of T).DeleteAsync
-        Await _db.ExecuteAsync("DELETE FROM " & GetTableName() & " WHERE Id = @id", New With {id})
+        Await _db.ExecuteAsync("DELETE FROM " & GetTableName & " WHERE Id = @id", New With {id})
     End Function
 
     Public Async Function FetchAllAsync() As Task(Of IEnumerable(Of T)) Implements IFetchAllRepository(Of T).FetchAllAsync
-        Return Await _db.QueryAsync(Of T)("SELECT * FROM " & GetTableName())
+        Return Await _db.QueryAsync(Of T)("SELECT * FROM " & GetTableName)
     End Function
 
     Public Async Function UpdateAsync(dataObject As T) As Task Implements IUpdateRepository(Of T).UpdateAsync
         Dim queryString = BuildUpdateQueryString(dataObject)
 
-        Dim sqlString As String = "UPDATE " & GetTableName() & "SET " & queryString
+        Dim sqlString As String = "UPDATE " & GetTableName & "SET " & queryString
 
         Await _db.ExecuteAsync("", dataObject)
     End Function
