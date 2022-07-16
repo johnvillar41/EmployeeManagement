@@ -17,13 +17,13 @@ Public Interface IUpdateRepository(Of T)
 End Interface
 
 Public Interface IFindByIdRepository(Of T)
-    Function FindByIdAsync(id As Integer, sqlQuery As String) As Task(Of T)
+    Function FindByIdAsync(id As Integer, tableName As String) As Task(Of T)
 End Interface
 
 Public Interface IFetchAllRepository(Of T)
-    Function FetchAllAsync(sqlQuery As String) As Task(Of IEnumerable(Of T))
+    Function FetchAllAsync(tableName As String) As Task(Of IEnumerable(Of T))
 End Interface
 
 Public Interface IDeleteRepository(Of T)
-    Function DeleteAsync(id As Integer, sqlQuery As String) As Task
+    Function DeleteAsync(id As Integer, tableName As String) As Task
 End Interface

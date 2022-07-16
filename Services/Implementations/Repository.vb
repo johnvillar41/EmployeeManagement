@@ -15,16 +15,16 @@ Public Class Repository(Of T)
         Await _db.ExecuteAsync(sqlQuery, dataObject)
     End Function
 
-    Public Async Function FindByIdAsync(id As Integer, sqlQuery As String) As Task(Of T) Implements IFindByIdRepository(Of T).FindByIdAsync
-        Return Await _db.QueryFirstOrDefaultAsync(Of T)(sqlQuery, New With {id})
+    Public Async Function FindByIdAsync(id As Integer, tableName As String) As Task(Of T) Implements IFindByIdRepository(Of T).FindByIdAsync
+        Return Await _db.QueryFirstOrDefaultAsync(Of T)("SELECT * FROM " & tableName & " WHERE Id = @id", New With {id})
     End Function
 
-    Public Async Function DeleteAsync(id As Integer, sqlQuery As String) As Task Implements IDeleteRepository(Of T).DeleteAsync
-        Await _db.ExecuteAsync(sqlQuery, New With {id})
+    Public Async Function DeleteAsync(id As Integer, tableName As String) As Task Implements IDeleteRepository(Of T).DeleteAsync
+        Await _db.ExecuteAsync("DELETE FROM " & tableName & " WHERE Id = @id", New With {id})
     End Function
 
-    Public Async Function FetchAllAsync(sqlQuery As String) As Task(Of IEnumerable(Of T)) Implements IFetchAllRepository(Of T).FetchAllAsync
-        Return Await _db.QueryAsync(Of T)(sqlQuery)
+    Public Async Function FetchAllAsync(tableName As String) As Task(Of IEnumerable(Of T)) Implements IFetchAllRepository(Of T).FetchAllAsync
+        Return Await _db.QueryAsync(Of T)("SELECT * FROM " & tableName)
     End Function
 
     Public Async Function UpdateAsync(dataObject As T, sqlQuery As String) As Task Implements IUpdateRepository(Of T).UpdateAsync
