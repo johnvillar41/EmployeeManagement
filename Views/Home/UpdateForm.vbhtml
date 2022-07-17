@@ -6,7 +6,7 @@ End Code
 
 <div class="jumbotron shadow-sm rounded">
     <div class="container">
-        @Using (Html.BeginForm())
+        @Using (Html.BeginForm("Update", "Home", FormMethod.Post))
             @Html.AntiForgeryToken()
 
             @<div class="form-horizontal">

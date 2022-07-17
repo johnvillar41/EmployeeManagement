@@ -38,10 +38,8 @@ Public MustInherit Class Repository(Of T)
 
     Public Async Function UpdateAsync(dataObject As T) As Task Implements IUpdateRepository(Of T).UpdateAsync
         Dim queryString = BuildUpdateQueryString(dataObject)
-
-        Dim sqlString As String = "UPDATE " & GetTableName & "SET " & queryString
-
-        Await _db.ExecuteAsync("", dataObject)
+        Dim sqlString As String = "UPDATE " & GetTableName & " SET " & queryString & " WHERE Id = @Id"
+        Await _db.ExecuteAsync(sqlString, dataObject)
     End Function
 
     Private Function BuildUpdateQueryString(dataObject As T) As String
@@ -55,7 +53,7 @@ Public MustInherit Class Repository(Of T)
                 Exit For
             End If
 
-            queryBuilder.Append(m_property(i).Name)
+            queryBuilder.Append(m_property(i).Name & "=")
             queryBuilder.Append("@" & m_property(i).Name)
 
             If i + +1 >= propertyCount Then
@@ -64,8 +62,8 @@ Public MustInherit Class Repository(Of T)
 
             queryBuilder.Append(",")
         Next
-
-        Return queryBuilder.ToString()
+        Dim queryString = queryBuilder.ToString()
+        Return queryString
     End Function
 
     Private Function BuildInsertQueryString(dataObject As T) As (String, String)

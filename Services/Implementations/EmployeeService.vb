@@ -27,4 +27,8 @@ Public Class EmployeeService
     Public Async Function DeleteEmployeeAsync(id As Integer) As Task Implements IEmployeeService.DeleteEmployeeAsync
         Await DeleteAsync(id)
     End Function
+
+    Public Async Function ModifyEmployeeAsync(employee As EmployeeModel) As Task Implements IEmployeeService.ModifyEmployeeAsync
+        Await UpdateAsync(employee)
+    End Function
 End Class

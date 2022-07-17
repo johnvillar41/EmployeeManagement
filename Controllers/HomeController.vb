@@ -18,6 +18,8 @@ Public Class HomeController
         Return RedirectToAction(NameOf(Index))
     End Function
 
+    <HttpPost>
+    <ValidateAntiForgeryToken>
     Async Function Create(employee As EmployeeModel) As Task(Of ActionResult)
         If ModelState.IsValid Then
             Await _employeeService.CreateNewEmployeeAsync(employee)
@@ -25,6 +27,17 @@ Public Class HomeController
         End If
 
         Return RedirectToAction(NameOf(CreateForm))
+    End Function
+
+    <HttpPost>
+    <ValidateAntiForgeryToken>
+    Async Function Update(employeeModel As EmployeeModel) As Task(Of ActionResult)
+        If ModelState.IsValid Then
+            Await _employeeService.ModifyEmployeeAsync(employeeModel)
+            Return RedirectToAction(NameOf(Index))
+        End If
+
+        Return View(NameOf(UpdateForm), employeeModel)
     End Function
 
     Async Function UpdateForm(employeeId As Integer) As Task(Of ActionResult)
