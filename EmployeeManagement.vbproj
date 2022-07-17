@@ -346,6 +346,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\CreateForm.vbhtml" />
     <Content Include="Views\Home\Detail.vbhtml" />
+    <Content Include="Views\Home\UpdateForm.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

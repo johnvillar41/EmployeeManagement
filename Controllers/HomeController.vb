@@ -27,6 +27,11 @@ Public Class HomeController
         Return RedirectToAction(NameOf(CreateForm))
     End Function
 
+    Async Function UpdateForm(employeeId As Integer) As Task(Of ActionResult)
+        Dim employeeDetail As EmployeeModel = Await _employeeService.FindEmployeeAsync(employeeId)
+        Return View(NameOf(UpdateForm), employeeDetail)
+    End Function
+
     Function CreateForm() As ActionResult
         Return View(NameOf(CreateForm))
     End Function

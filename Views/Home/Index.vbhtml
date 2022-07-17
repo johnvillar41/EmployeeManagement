@@ -22,7 +22,7 @@
                             @Html.DisplayFor(Function(modelItem) item.BirthDate)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", New With {.employeeId = item.Id}) |
+                            @Html.ActionLink("Edit", "UpdateForm", New With {.employeeId = item.Id}) |
                             @Html.ActionLink("Details", "Detail", New With {.employeeId = item.Id}) |
                             @Html.ActionLink("Delete", "Delete", New With {.employeeId = item.Id})
                         </td>
