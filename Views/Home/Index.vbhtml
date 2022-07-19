@@ -1,4 +1,4 @@
-﻿@ModelType IEnumerable(Of EmployeeModel)
+﻿@ModelType IEnumerable(Of EmployeeViewModel)
 <div class="jumbotron shadow-sm">
     <div class="container">
         @Html.ActionLink("Create New", "CreateForm", Nothing, New With {.class = "btn btn-secondary shadow-sm"})

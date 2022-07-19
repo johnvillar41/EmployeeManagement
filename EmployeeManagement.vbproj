@@ -211,6 +211,8 @@
     <Compile Include="Services\Interfaces\IRepository.vb" />
     <Compile Include="Services\Interfaces\IWorkService.vb" />
     <Compile Include="UnityBootstrapper.vb" />
+    <Compile Include="ViewModels\EmployeeViewModel.vb" />
+    <Compile Include="ViewModels\WorkViewModel.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

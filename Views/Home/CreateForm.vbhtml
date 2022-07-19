@@ -1,4 +1,4 @@
-﻿@ModelType EmployeeManagement.EmployeeModel
+﻿@ModelType EmployeeManagement.EmployeeViewModel
 <div class="jumbotron shadow-sm">
     <div class="container">
         @Using (Html.BeginForm("Create", "Home", FormMethod.Post))

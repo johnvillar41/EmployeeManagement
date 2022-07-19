@@ -1,4 +1,4 @@
-﻿@ModelType EmployeeManagement.EmployeeModel
+﻿@ModelType EmployeeManagement.EmployeeViewModel
 @Code
     ViewData("Title") = "Detail"
 End Code
