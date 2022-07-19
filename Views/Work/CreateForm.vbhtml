@@ -1,6 +1,6 @@
 ﻿@ModelType EmployeeManagement.WorkViewModel
 
-@Using (Html.BeginForm())
+@Using (Html.BeginForm("Create", "Work", FormMethod.Post))
     @Html.AntiForgeryToken()
 
     @<div class="bg-light shadow rounded jumbotron">

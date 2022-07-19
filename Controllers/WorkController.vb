@@ -29,6 +29,8 @@ Namespace Controllers
             Return RedirectToAction(NameOf(Index), New With {employeeId})
         End Function
 
+        <HttpPost>
+        <ValidateAntiForgeryToken>
         Async Function Create(work As WorkModel) As Task(Of ActionResult)
             Await _workService.AddWorkAsync(work)
             Return RedirectToAction(NameOf(Index), New With {work.EmployeeId})
