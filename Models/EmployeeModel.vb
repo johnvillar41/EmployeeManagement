@@ -20,4 +20,6 @@ Public Class EmployeeModel
 
     <Required(ErrorMessage:="Status is Required")>
     Public Property IsActive As Integer
+
+    Public Property WorkLoad As IEnumerable(Of WorkModel)
 End Class
