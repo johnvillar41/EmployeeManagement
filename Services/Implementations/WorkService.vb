@@ -1,4 +1,6 @@
-﻿Public Class WorkService
+﻿Imports System.Threading.Tasks
+
+Public Class WorkService
     Inherits Repository(Of WorkModel)
     Implements IWorkService
 
@@ -8,19 +10,19 @@
         End Get
     End Property
 
-    Public Function AddWorkAsync(employeeId As Integer, work As WorkModel) As Object Implements IWorkService.AddWorkAsync
-        Throw New NotImplementedException()
+    Public Async Function AddWorkAsync(work As WorkModel) As Task Implements IWorkService.AddWorkAsync
+        Await AddAsync(work)
     End Function
 
-    Public Function DeleteWorkAsync(workId As Integer) As Object Implements IWorkService.DeleteWorkAsync
-        Throw New NotImplementedException()
+    Public Async Function DeleteWorkAsync(workId As Integer) As Task Implements IWorkService.DeleteWorkAsync
+        Await DeleteAsync(workId)
     End Function
 
-    Public Function UpdateWorkAsync(workId As Integer, work As WorkModel) As Object Implements IWorkService.UpdateWorkAsync
-        Throw New NotImplementedException()
+    Public Async Function UpdateWorkAsync(work As WorkModel) As Task Implements IWorkService.UpdateWorkAsync
+        Await UpdateAsync(work)
     End Function
 
-    Public Function FetchWorksAsync(employeeId As Integer) As Object Implements IWorkService.FetchWorksAsync
-        Throw New NotImplementedException()
+    Public Async Function FetchWorksAsync(employeeId As Integer) As Task Implements IWorkService.FetchWorksAsync
+        Await FetchAllAsync()
     End Function
 End Class

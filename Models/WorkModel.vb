@@ -2,6 +2,7 @@
 
 Public Class WorkModel
     Public Property Id As Integer
+    Public Property EmployeeId As Integer
 
     <Required(ErrorMessage:="Title is required")>
     Public Property Title As String
