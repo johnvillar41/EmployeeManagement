@@ -206,8 +206,10 @@
     <Compile Include="Controllers\HomeController.vb" />
     <Compile Include="Services\Implementations\EmployeeService.vb" />
     <Compile Include="Services\Implementations\Repository.vb" />
+    <Compile Include="Services\Implementations\WorkService.vb" />
     <Compile Include="Services\Interfaces\IEmployeeService.vb" />
     <Compile Include="Services\Interfaces\IRepository.vb" />
+    <Compile Include="Services\Interfaces\IWorkService.vb" />
     <Compile Include="UnityBootstrapper.vb" />
   </ItemGroup>
   <ItemGroup>
