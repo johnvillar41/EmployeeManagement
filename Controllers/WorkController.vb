@@ -11,7 +11,17 @@ Namespace Controllers
 
         Async Function Index(employeeId As Integer) As Task(Of ActionResult)
             Dim workLoads = Await _workService.FetchWorksAsync(employeeId)
-            Return View(workLoads)
+            Dim workLoadViewModels = workLoads.Select(Of WorkViewModel)(Function(model) New WorkViewModel With {
+                .Id = model.Id,
+                .Description = model.Description,
+                .EmployeeId = model.EmployeeId,
+                .Title = model.Title
+            })
+            Dim displayWorkViewModel = New DisplayWorkViewModel() With {
+                .WorkViewModels = workLoadViewModels,
+                .EmployeeId = employeeId
+            }
+            Return View(displayWorkViewModel)
         End Function
 
         Async Function Delete(workId As Integer, employeeId As Integer) As Task(Of ActionResult)
@@ -25,7 +35,7 @@ Namespace Controllers
         End Function
 
         Function CreateForm(employeeId As Integer) As ActionResult
-            Dim work = New WorkModel With {
+            Dim work = New WorkViewModel With {
                 .EmployeeId = employeeId
             }
             Return View(NameOf(CreateForm), work)

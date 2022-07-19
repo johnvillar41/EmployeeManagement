@@ -10,7 +10,16 @@ Public Class HomeController
 
     Async Function Index() As Task(Of ActionResult)
         Dim employees = Await _employeeService.ViewAllEmployeesAsync()
-        Return View(employees)
+        Dim employeeViewModels = employees.Select(Of EmployeeViewModel)(Function(model) New EmployeeViewModel() With {
+            .Id = model.Id,
+            .Name = model.Name,
+            .Age = model.Age,
+            .Salary = model.Salary,
+            .Address = model.Address,
+            .BirthDate = model.BirthDate,
+            .IsActive = model.IsActive
+        })
+        Return View(employeeViewModels)
     End Function
 
     Async Function Delete(employeeId As Integer) As Task(Of ActionResult)
@@ -42,7 +51,16 @@ Public Class HomeController
 
     Async Function UpdateForm(employeeId As Integer) As Task(Of ActionResult)
         Dim employeeDetail As EmployeeModel = Await _employeeService.FindEmployeeAsync(employeeId)
-        Return View(NameOf(UpdateForm), employeeDetail)
+        Dim employeeDetailViewModel As EmployeeViewModel = New EmployeeViewModel() With {
+            .Id = employeeDetail.Id,
+            .Name = employeeDetail.Name,
+            .Age = employeeDetail.Age,
+            .Salary = employeeDetail.Salary,
+            .Address = employeeDetail.Address,
+            .BirthDate = employeeDetail.BirthDate,
+            .IsActive = employeeDetail.IsActive
+        }
+        Return View(NameOf(UpdateForm), employeeDetailViewModel)
     End Function
 
     Function CreateForm() As ActionResult
@@ -51,6 +69,15 @@ Public Class HomeController
 
     Async Function Detail(employeeId As Integer) As Task(Of ActionResult)
         Dim employeeDetail As EmployeeModel = Await _employeeService.FindEmployeeAsync(employeeId)
-        Return View(NameOf(Detail), employeeDetail)
+        Dim employeeDetailViewModel As EmployeeViewModel = New EmployeeViewModel() With {
+            .Id = employeeDetail.Id,
+            .Name = employeeDetail.Name,
+            .Age = employeeDetail.Age,
+            .Salary = employeeDetail.Salary,
+            .Address = employeeDetail.Address,
+            .BirthDate = employeeDetail.BirthDate,
+            .IsActive = employeeDetail.IsActive
+        }
+        Return View(NameOf(Detail), employeeDetailViewModel)
     End Function
 End Class

@@ -1,4 +1,4 @@
-﻿@ModelType EmployeeManagement.WorkModel
+﻿@ModelType EmployeeManagement.WorkViewModel
 
 @Using (Html.BeginForm())
     @Html.AntiForgeryToken()

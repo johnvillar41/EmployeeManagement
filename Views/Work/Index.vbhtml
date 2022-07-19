@@ -1,10 +1,10 @@
-﻿@ModelType IEnumerable(Of WorkModel)
+﻿@ModelType DisplayWorkViewModel
 <div Class="container">
     @If Model IsNot Nothing Then
-        @Html.ActionLink("Create", "CreateForm", New With {.employeeId = Model.FirstOrDefault().EmployeeId}, New With {.class = "btn btn-success btn-lg"})
+        @Html.ActionLink("Create", "CreateForm", New With {.employeeId = Model.EmployeeId}, New With {.class = "btn btn-success btn-lg"})
     End If
 
-    @For Each item As WorkModel In Model
+    @For Each item As WorkViewModel In Model.WorkViewModels
 
         @<div Class="shadow-sm bg-light" style="width: 18rem;">
             <div Class="card-body">
