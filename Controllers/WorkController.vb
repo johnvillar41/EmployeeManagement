@@ -9,7 +9,11 @@ Namespace Controllers
             _workService = workService
         End Sub
 
-        Async Function Index(employeeId As Integer) As Task(Of ActionResult)
+        Async Function Index(employeeId? As Integer) As Task(Of ActionResult)
+            If employeeId Is Nothing Then
+                Return RedirectToAction("Index", "Home")
+            End If
+
             Dim workLoads = Await _workService.FetchWorksAsync(employeeId)
             Dim workLoadViewModels = workLoads.Select(Of WorkViewModel)(Function(model) New WorkViewModel With {
                 .Id = model.Id,

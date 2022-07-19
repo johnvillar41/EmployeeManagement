@@ -17,4 +17,8 @@
             </div>
         Next
     </div>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 </div>
