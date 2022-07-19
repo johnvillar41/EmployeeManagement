@@ -53,6 +53,7 @@ Public NotInheritable Class UnityBootstrapper
 	Private Shared Function BuildUnityContainer() As IUnityContainer
 		Dim container = New UnityContainer()
 		container.RegisterType(Of IEmployeeService, EmployeeService)
+		container.RegisterType(Of IWorkService, WorkService)
 		Return container
 	End Function
 End Class

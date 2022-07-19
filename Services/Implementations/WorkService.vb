@@ -22,7 +22,7 @@ Public Class WorkService
         Await UpdateAsync(work)
     End Function
 
-    Public Async Function FetchWorksAsync(employeeId As Integer) As Task Implements IWorkService.FetchWorksAsync
-        Await FetchAllAsync()
+    Public Async Function FetchWorksAsync(employeeId As Integer) As Task(Of IEnumerable(Of WorkModel)) Implements IWorkService.FetchWorksAsync
+        Return Await FetchAllAsync()
     End Function
 End Class
