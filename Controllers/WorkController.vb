@@ -14,5 +14,21 @@ Namespace Controllers
             Return View(workLoads)
         End Function
 
+        Async Function Delete(workId As Integer, employeeId As Integer) As Task(Of ActionResult)
+            Await _workService.DeleteWorkAsync(workId)
+            Return RedirectToAction(NameOf(Index), New With {employeeId})
+        End Function
+
+        Async Function Create(work As WorkModel) As Task(Of ActionResult)
+            Await _workService.AddWorkAsync(work)
+            Return RedirectToAction(NameOf(Index), New With {work.EmployeeId})
+        End Function
+
+        Function CreateForm(employeeId As Integer) As ActionResult
+            Dim work = New WorkModel With {
+                .EmployeeId = employeeId
+            }
+            Return View(NameOf(CreateForm), work)
+        End Function
     End Class
 End Namespace

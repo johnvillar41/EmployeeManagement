@@ -352,6 +352,7 @@
     <Content Include="Views\Home\Detail.vbhtml" />
     <Content Include="Views\Home\UpdateForm.vbhtml" />
     <Content Include="Views\Work\Index.vbhtml" />
+    <Content Include="Views\Work\CreateForm.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
