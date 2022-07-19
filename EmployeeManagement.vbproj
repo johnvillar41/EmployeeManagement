@@ -182,6 +182,7 @@
     <Compile Include="App_Start\BundleConfig.vb" />
     <Compile Include="App_Start\FilterConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
+    <Compile Include="Controllers\WorkController.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -348,6 +349,7 @@
     <Content Include="Views\Home\CreateForm.vbhtml" />
     <Content Include="Views\Home\Detail.vbhtml" />
     <Content Include="Views\Home\UpdateForm.vbhtml" />
+    <Content Include="Views\Work\Index.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
