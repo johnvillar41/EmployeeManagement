@@ -23,6 +23,6 @@ Public Class WorkService
     End Function
 
     Public Async Function FetchWorksAsync(employeeId As Integer) As Task(Of IEnumerable(Of WorkModel)) Implements IWorkService.FetchWorksAsync
-        Return Await FetchAllAsync()
+        Return Await SelectQueryAsync("SELECT * FROM " & GetTableName & " WHERE EmployeeId = @EmployeeId", New With {.EmployeeId = employeeId})
     End Function
 End Class

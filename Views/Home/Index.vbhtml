@@ -24,7 +24,8 @@
                         <td>
                             @Html.ActionLink("Edit", "UpdateForm", New With {.employeeId = item.Id}) |
                             @Html.ActionLink("Details", "Detail", New With {.employeeId = item.Id}) |
-                            @Html.ActionLink("Delete", "Delete", New With {.employeeId = item.Id})
+                            @Html.ActionLink("Delete", "Delete", New With {.employeeId = item.Id}) |
+                            @Html.ActionLink("Work Loads", "Index", "Work", New With {.employeeId = item.Id}, Nothing)
                         </td>
                     </tr>
                 Next

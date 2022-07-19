@@ -42,6 +42,10 @@ Public MustInherit Class Repository(Of T)
         Await _db.ExecuteAsync(sqlString, dataObject)
     End Function
 
+    Public Async Function SelectQueryAsync(queryString As String, objectParams As Object) As Task(Of IEnumerable(Of T)) Implements IQueryRepository(Of T).SelectQueryAsync
+        Return Await _db.QueryAsync(Of T)(queryString, objectParams)
+    End Function
+
     Private Function BuildUpdateQueryString(dataObject As T) As String
         Dim queryBuilder As New StringBuilder
         Dim m_property = dataObject.GetType().GetProperties()
