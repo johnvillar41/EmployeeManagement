@@ -1,38 +1,15 @@
-﻿@ModelType IEnumerable(Of EmployeeManagement.WorkModel)
-@Code
-ViewData("Title") = "Index"
-End Code
+﻿@ModelType IEnumerable(Of WorkModel)
+<div Class="container">
+    @For Each item As WorkModel In Model
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(Function(model) model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(Function(model) model.Description)
-        </th>
-        <th></th>
-    </tr>
-
-@For Each item In Model
-    @<tr>
-        <td>
-            @Html.DisplayFor(Function(modelItem) item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(Function(modelItem) item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", New With {.id = item.Id }) |
-            @Html.ActionLink("Details", "Details", New With {.id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", New With {.id = item.Id })
-        </td>
-    </tr>
-Next
-
-</table>
+        @<div Class="shadow-sm bg-light" style="width: 18rem;">
+            <div Class="card-body">
+                <h5 Class="card-title">@item.Title</h5>
+                <h6 Class="card-subtitle mb-2 text-muted">@item.Id</h6>
+                <p Class="card-text">@item.Description</p>
+                <a href="#" Class="card-link">Card link</a>
+                <a href="#" Class="card-link">Another link</a>
+            </div>
+        </div>
+    Next
+</div>
