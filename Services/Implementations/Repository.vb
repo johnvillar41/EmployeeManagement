@@ -50,21 +50,22 @@ Public MustInherit Class Repository(Of T)
         Dim queryBuilder As New StringBuilder
         Dim m_property = dataObject.GetType().GetProperties()
         Dim propertyCount = dataObject.GetType().GetProperties().Count
-        Dim limit As Integer = propertyCount - 1
 
         For i As Integer = 1 To propertyCount
             If i >= propertyCount Then
                 Exit For
             End If
 
-            queryBuilder.Append(m_property(i).Name & "=")
-            queryBuilder.Append("@" & m_property(i).Name)
-
-            If i + +1 >= propertyCount Then
-                Exit For
+            If m_property(i).GetValue(dataObject) IsNot Nothing Then
+                queryBuilder.Append(m_property(i).Name & "=")
+                queryBuilder.Append("@" & m_property(i).Name)
+                If i + 1 < propertyCount Then
+                    If (m_property(i + 1)).GetValue(dataObject) IsNot Nothing Then
+                        queryBuilder.Append(",")
+                    End If
+                End If
             End If
 
-            queryBuilder.Append(",")
         Next
         Dim queryString = queryBuilder.ToString()
         Return queryString
