@@ -76,22 +76,22 @@ Public MustInherit Class Repository(Of T)
 
         Dim m_property = dataObject.GetType().GetProperties()
         Dim propertyCount = dataObject.GetType().GetProperties().Count
-        Dim limit As Integer = propertyCount - 1
 
         For i As Integer = 1 To propertyCount
             If i >= propertyCount Then
                 Exit For
             End If
 
-            tableBuilder.Append(m_property(i).Name)
-            valueBuilder.Append("@" & m_property(i).Name)
-
-            If i + +1 >= propertyCount Then
-                Exit For
+            If m_property(i).GetValue(dataObject) IsNot Nothing Then
+                tableBuilder.Append(m_property(i).Name)
+                valueBuilder.Append("@" & m_property(i).Name)
+                If i + 1 < propertyCount Then
+                    If (m_property(i + 1)).GetValue(dataObject) IsNot Nothing Then
+                        tableBuilder.Append(",")
+                        valueBuilder.Append(",")
+                    End If
+                End If
             End If
-
-            tableBuilder.Append(",")
-            valueBuilder.Append(",")
         Next
 
         Dim tableString As String = tableBuilder.ToString()
@@ -100,7 +100,5 @@ Public MustInherit Class Repository(Of T)
         Dim tupleString = (tableString, valueString)
         Return tupleString
     End Function
-
-
 
 End Class
