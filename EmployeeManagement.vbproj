@@ -182,6 +182,7 @@
     <Compile Include="App_Start\BundleConfig.vb" />
     <Compile Include="App_Start\FilterConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
+    <Compile Include="Controllers\SalaryController.vb" />
     <Compile Include="Controllers\WorkController.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
@@ -211,6 +212,7 @@
     <Compile Include="Services\Implementations\WorkService.vb" />
     <Compile Include="Services\Interfaces\IEmployeeService.vb" />
     <Compile Include="Services\Interfaces\IRepository.vb" />
+    <Compile Include="Services\Interfaces\ISalaryService.vb" />
     <Compile Include="Services\Interfaces\IWorkService.vb" />
     <Compile Include="UnityBootstrapper.vb" />
     <Compile Include="ViewModels\DisplayWorkViewModel.vb" />
@@ -364,6 +366,7 @@
     <Content Include="Views\Work\CreateForm.vbhtml" />
     <Content Include="Views\Employee\_PersonalDetailPartial.vbhtml" />
     <Content Include="Views\Salary\_EmployeeSalaryPartial.vbhtml" />
+    <Content Include="Views\Salary\Index.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
