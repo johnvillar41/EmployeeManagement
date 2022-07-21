@@ -78,17 +78,21 @@ Public Class EmployeeController
             .BirthDate = employeeDetail.BirthDate,
             .IsActive = employeeDetail.IsActive
         }
-        Dim employeeSalary As EmployeeSalaryModel = Await _employeeService.FindSalaryAsync(employeeId)
+        Dim employeeSalary As EmployeeSalaryModel = Await _employeeService.FindEmployeeSalaryAsync(employeeId)
         If employeeSalary Is Nothing Then
             employeeSalary = New EmployeeSalaryModel()
         End If
 
+        Dim salary As SalaryModel = Await _employeeService.FindSalaryAsync(employeeSalary.SalaryId)
+        If salary Is Nothing Then
+            salary = New SalaryModel()
+        End If
         Dim employeeSalaryViewModel As EmployeeSalaryViewModel = New EmployeeSalaryViewModel() With {
             .Allowance = employeeSalary.Allowance,
             .Deductions = employeeSalary.Deductions,
             .EmployeeId = employeeSalary.EmployeeId,
             .Id = employeeSalary.Id,
-            .Net = employeeSalary.Net,
+            .BaseSalary = salary.BaseNet,
             .NumberOfAbsent = employeeSalary.NumberOfAbsent,
             .NumberOfLate = employeeSalary.NumberOfLate,
             .SalaryId = employeeSalary.SalaryId
