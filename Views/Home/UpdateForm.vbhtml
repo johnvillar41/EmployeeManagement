@@ -8,12 +8,7 @@ End Code
         @Html.Partial("_PersonalDetailPartial", Model.EmployeeViewModel)
     </div>
     <div class="col">
-        <div class="h-100 jumbotron bg-light rounded shadow-sm">
-            <div class="container">
-                <h2>Salary Details</h2>
-                <hr />
-            </div>
-        </div>
+        @Html.Partial("../Salary/_EmployeeSalaryPartial", Model.EmployeeSalaryViewModel)
     </div>
 </div>
 

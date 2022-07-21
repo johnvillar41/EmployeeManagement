@@ -95,7 +95,7 @@ Public Class HomeController
         }
         Dim employeeUpdateViewModel As EmployeeUpdateViewModel = New EmployeeUpdateViewModel() With {
             .EmployeeViewModel = employeeViewModel,
-            .SalaryViewModel = employeeSalaryViewModel
+            .EmployeeSalaryViewModel = employeeSalaryViewModel
         }
         Return View(NameOf(UpdateForm), employeeUpdateViewModel)
     End Function
