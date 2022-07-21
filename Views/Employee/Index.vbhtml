@@ -1,19 +1,18 @@
 ﻿@ModelType IEnumerable(Of EmployeeViewModel)
 <div class="jumbotron shadow-sm bg-light">
     <div class="container">
-        @Html.ActionLink("Create New", "CreateForm", Nothing, New With {.class = "btn btn-secondary shadow-sm"})
-        <hr />
+        @Html.ActionLink("Create New", "CreateForm", Nothing, New With {.class = "btn btn-secondary shadow-sm mb-2"})
         @If Model.Count = 0 Then
             @<h1>Empty Collection</h1>
         Else
             @<div class="table-responsive">
-                <Table Class="table table-bordered">
+                <Table Class="table">
                     <thead>
                         <tr>
-                            <td>@Html.LabelFor(Function(modelItem) modelItem.FirstOrDefault().Name)</td>
-                            <td>@Html.LabelFor(Function(modelItem) modelItem.FirstOrDefault().Id)</td>
-                            <td>@Html.LabelFor(Function(modelItem) modelItem.FirstOrDefault().BirthDate)</td>
-                            <td>Actions</td>
+                            <td class="font-weight-bold">@Html.DisplayNameFor(Function(modelItem) modelItem.FirstOrDefault().Name)</td>
+                            <td class="font-weight-bold">@Html.DisplayNameFor(Function(modelItem) modelItem.FirstOrDefault().Id)</td>
+                            <td class="font-weight-bold">@Html.DisplayNameFor(Function(modelItem) modelItem.FirstOrDefault().BirthDate)</td>
+                            <td class="font-weight-bold">Actions</td>
                         </tr>
                     </thead>
                     @For Each item In Model

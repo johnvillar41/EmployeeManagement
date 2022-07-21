@@ -209,6 +209,7 @@
     <Compile Include="Controllers\EmployeeController.vb" />
     <Compile Include="Services\Implementations\EmployeeService.vb" />
     <Compile Include="Services\Implementations\Repository.vb" />
+    <Compile Include="Services\Implementations\SalaryService.vb" />
     <Compile Include="Services\Implementations\WorkService.vb" />
     <Compile Include="Services\Interfaces\IEmployeeService.vb" />
     <Compile Include="Services\Interfaces\IRepository.vb" />
@@ -367,6 +368,7 @@
     <Content Include="Views\Employee\_PersonalDetailPartial.vbhtml" />
     <Content Include="Views\Salary\_EmployeeSalaryPartial.vbhtml" />
     <Content Include="Views\Salary\Index.vbhtml" />
+    <Content Include="Views\Salary\CreateForm.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

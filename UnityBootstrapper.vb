@@ -56,6 +56,7 @@ Public NotInheritable Class UnityBootstrapper
 		container.RegisterType(Of IRepository(Of SalaryModel), Repository(Of SalaryModel))
 		container.RegisterType(Of IEmployeeService, EmployeeService)
 		container.RegisterType(Of IWorkService, WorkService)
+		container.RegisterType(Of ISalaryService, SalaryService)
 		Return container
 	End Function
 End Class
