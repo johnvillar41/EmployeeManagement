@@ -29,9 +29,19 @@ Public Class HomeController
 
     <HttpPost>
     <ValidateAntiForgeryToken>
-    Async Function Create(employee As EmployeeModel) As Task(Of ActionResult)
+    Async Function Create(employee As EmployeeViewModel) As Task(Of ActionResult)
         If ModelState.IsValid Then
-            Await _employeeService.CreateNewEmployeeAsync(employee)
+            Dim employeeModel = New EmployeeModel() With {
+                .Address = employee.Address,
+                .Age = employee.Age,
+                .BirthDate = employee.BirthDate,
+                .Id = employee.Id,
+                .IsActive = employee.IsActive,
+                .Name = employee.Name,
+                .Salary = employee.Salary,
+                .WorkLoad = Nothing
+            }
+            Await _employeeService.CreateNewEmployeeAsync(employeeModel)
             Return RedirectToAction(NameOf(Index))
         End If
 
@@ -40,13 +50,23 @@ Public Class HomeController
 
     <HttpPost>
     <ValidateAntiForgeryToken>
-    Async Function Update(employeeModel As EmployeeModel) As Task(Of ActionResult)
+    Async Function Update(employee As EmployeeModel) As Task(Of ActionResult)
         If ModelState.IsValid Then
+            Dim employeeModel = New EmployeeModel() With {
+                .Address = employee.Address,
+                .Age = employee.Age,
+                .BirthDate = employee.BirthDate,
+                .Id = employee.Id,
+                .IsActive = employee.IsActive,
+                .Name = employee.Name,
+                .Salary = employee.Salary,
+                .WorkLoad = Nothing
+            }
             Await _employeeService.ModifyEmployeeAsync(employeeModel)
             Return RedirectToAction(NameOf(Index))
         End If
 
-        Return View(NameOf(UpdateForm), employeeModel)
+        Return View(NameOf(UpdateForm), employee)
     End Function
 
     Async Function UpdateForm(employeeId As Integer) As Task(Of ActionResult)
