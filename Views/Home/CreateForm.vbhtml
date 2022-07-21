@@ -1,5 +1,5 @@
 ﻿@ModelType EmployeeManagement.EmployeeViewModel
-<div class="jumbotron shadow-sm">
+<div class="jumbotron shadow-sm bg-light">
     <div class="container">
         @Using (Html.BeginForm("Create", "Home", FormMethod.Post))
             @Html.AntiForgeryToken()
