@@ -6,12 +6,12 @@ Public Interface IRepository(Of T)
         IFindByIdRepository(Of T),
         IFetchAllRepository(Of T),
         IDeleteRepository(Of T),
-        IQueryRepository(Of T)
+        IQueryRepository
 
 
 End Interface
-Public Interface IQueryRepository(Of T)
-    Function SelectQueryAsync(queryString As String, objectParams As Object) As Task(Of IEnumerable(Of T))
+Public Interface IQueryRepository
+    Function SelectQueryAsync(Of T)(queryString As String, objectParams As Object) As Task(Of IEnumerable(Of T))
 End Interface
 Public Interface IAddRepository(Of T)
     Function AddAsync(dataObject As T) As Task

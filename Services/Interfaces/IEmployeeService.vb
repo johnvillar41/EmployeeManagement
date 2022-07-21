@@ -6,4 +6,6 @@ Public Interface IEmployeeService
     Function FindEmployeeAsync(id As Integer) As Task(Of EmployeeModel)
     Function DeleteEmployeeAsync(id As Integer) As Task
     Function ModifyEmployeeAsync(employee As EmployeeModel) As Task
+    Function FetchNumberOfWorksAsync(employeeId As Integer) As Task(Of Integer)
+    Function FindSalaryAsync(employeeId As Integer) As Task(Of EmployeeSalaryModel)
 End Interface

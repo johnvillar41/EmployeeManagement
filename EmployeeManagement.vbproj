@@ -215,7 +215,10 @@
     <Compile Include="UnityBootstrapper.vb" />
     <Compile Include="ViewModels\DisplayWorkViewModel.vb" />
     <Compile Include="ViewModels\EmployeeDetailViewModel.vb" />
+    <Compile Include="ViewModels\EmployeeSalaryViewModel.vb" />
+    <Compile Include="ViewModels\EmployeeUpdateViewModel.vb" />
     <Compile Include="ViewModels\EmployeeViewModel.vb" />
+    <Compile Include="ViewModels\SalaryViewModel.vb" />
     <Compile Include="ViewModels\WorkViewModel.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -359,6 +362,7 @@
     <Content Include="Views\Home\UpdateForm.vbhtml" />
     <Content Include="Views\Work\Index.vbhtml" />
     <Content Include="Views\Work\CreateForm.vbhtml" />
+    <Content Include="Views\Home\_PersonalDetailPartial.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

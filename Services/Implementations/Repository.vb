@@ -2,7 +2,7 @@
 Imports System.Threading.Tasks
 Imports Dapper
 
-Public MustInherit Class Repository(Of T)
+Public Class Repository(Of T)
     Implements IRepository(Of T)
 
 
@@ -11,7 +11,7 @@ Public MustInherit Class Repository(Of T)
         _db = New SqlConnection(ConfigurationManager.ConnectionStrings("EmployeeDBConnection").ConnectionString)
     End Sub
 
-    Public MustOverride ReadOnly Property GetTableName As String
+    Public Overridable ReadOnly Property GetTableName As String
 
     Public Async Function AddAsync(dataObject As T) As Task Implements IAddRepository(Of T).AddAsync
         Dim tupleValue = BuildInsertQueryString(dataObject)
@@ -42,7 +42,7 @@ Public MustInherit Class Repository(Of T)
         Await _db.ExecuteAsync(sqlString, dataObject)
     End Function
 
-    Public Async Function SelectQueryAsync(queryString As String, objectParams As Object) As Task(Of IEnumerable(Of T)) Implements IQueryRepository(Of T).SelectQueryAsync
+    Public Async Function SelectQueryAsync(Of T)(queryString As String, objectParams As Object) As Task(Of IEnumerable(Of T)) Implements IQueryRepository.SelectQueryAsync
         Return Await _db.QueryAsync(Of T)(queryString, objectParams)
     End Function
 

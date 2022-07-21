@@ -4,12 +4,9 @@ Public Class HomeController
     Inherits System.Web.Mvc.Controller
 
     Private ReadOnly _employeeService As IEmployeeService
-    Private ReadOnly _workService As IWorkService
-    Public Sub New(
-                  employeeservice As IEmployeeService,
-                  workService As IWorkService)
+    Public Sub New(employeeservice As IEmployeeService)
         _employeeService = employeeservice
-        _workService = workService
+
     End Sub
 
     Async Function Index() As Task(Of ActionResult)
@@ -73,7 +70,7 @@ Public Class HomeController
 
     Async Function UpdateForm(employeeId As Integer) As Task(Of ActionResult)
         Dim employeeDetail As EmployeeModel = Await _employeeService.FindEmployeeAsync(employeeId)
-        Dim employeeDetailViewModel As EmployeeViewModel = New EmployeeViewModel() With {
+        Dim employeeViewModel As EmployeeViewModel = New EmployeeViewModel() With {
             .Id = employeeDetail.Id,
             .Name = employeeDetail.Name,
             .Age = employeeDetail.Age,
@@ -81,7 +78,26 @@ Public Class HomeController
             .BirthDate = employeeDetail.BirthDate,
             .IsActive = employeeDetail.IsActive
         }
-        Return View(NameOf(UpdateForm), employeeDetailViewModel)
+        Dim employeeSalary As EmployeeSalaryModel = Await _employeeService.FindSalaryAsync(employeeId)
+        If employeeSalary Is Nothing Then
+            employeeSalary = New EmployeeSalaryModel()
+        End If
+
+        Dim employeeSalaryViewModel As EmployeeSalaryViewModel = New EmployeeSalaryViewModel() With {
+            .Allowance = employeeSalary.Allowance,
+            .Deductions = employeeSalary.Deductions,
+            .EmployeeId = employeeSalary.EmployeeId,
+            .Id = employeeSalary.Id,
+            .Net = employeeSalary.Net,
+            .NumberOfAbsent = employeeSalary.NumberOfAbsent,
+            .NumberOfLate = employeeSalary.NumberOfLate,
+            .SalaryId = employeeSalary.SalaryId
+        }
+        Dim employeeUpdateViewModel As EmployeeUpdateViewModel = New EmployeeUpdateViewModel() With {
+            .EmployeeViewModel = employeeViewModel,
+            .SalaryViewModel = employeeSalaryViewModel
+        }
+        Return View(NameOf(UpdateForm), employeeUpdateViewModel)
     End Function
 
     Function CreateForm() As ActionResult
@@ -90,7 +106,7 @@ Public Class HomeController
 
     Async Function Detail(employeeId As Integer) As Task(Of ActionResult)
         Dim employeeDetail As EmployeeModel = Await _employeeService.FindEmployeeAsync(employeeId)
-        Dim employeeWork As IEnumerable(Of WorkModel) = Await _workService.FetchWorksAsync(employeeId)
+        Dim employeeNumberWork As Integer = Await _employeeService.FetchNumberOfWorksAsync(employeeId)
         Dim employeeDetailViewModel As EmployeeDetailViewModel = New EmployeeDetailViewModel() With {
             .Id = employeeDetail.Id,
             .Name = employeeDetail.Name,
@@ -99,7 +115,7 @@ Public Class HomeController
             .Address = employeeDetail.Address,
             .BirthDate = employeeDetail.BirthDate,
             .IsActive = employeeDetail.IsActive,
-            .NumberOfWork = employeeWork.Count()
+            .NumberOfWork = employeeNumberWork
         }
         Return View(NameOf(Detail), employeeDetailViewModel)
     End Function
