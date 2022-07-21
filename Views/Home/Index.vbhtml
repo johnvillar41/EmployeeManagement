@@ -8,6 +8,15 @@
         Else
             @<div class="table-responsive">
                 <Table Class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>@Html.LabelFor(Function(modelItem) modelItem.FirstOrDefault().Name)</td>
+                            <td>@Html.LabelFor(Function(modelItem) modelItem.FirstOrDefault().Salary)</td>
+                            <td>@Html.LabelFor(Function(modelItem) modelItem.FirstOrDefault().Id)</td>
+                            <td>@Html.LabelFor(Function(modelItem) modelItem.FirstOrDefault().BirthDate)</td>
+                            <td>Actions</td>
+                        </tr>
+                    </thead>
                     @For Each item In Model
                         @<tr>
                             <td>
