@@ -32,7 +32,7 @@
                             @Html.DisplayFor(Function(modelItem) item.BaseNet)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", New With {.id = item.Id}) |
+                            @Html.ActionLink("Edit", "UpdateForm", New With {.salaryId = item.Id}) |
                             @Html.ActionLink("Delete", "Delete", New With {.id = item.Id})
                         </td>
                     </tr>

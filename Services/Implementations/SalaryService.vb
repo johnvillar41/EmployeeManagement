@@ -17,4 +17,16 @@ Public Class SalaryService
     Public Async Function CreateSalaryAsync(salaryModel As SalaryModel) As Task Implements ISalaryService.CreateSalaryAsync
         Await AddAsync(salaryModel)
     End Function
+
+    Public Async Function UpdateEmployeeSalaryAsync(employeeSalaryModel As EmployeeSalaryModel) As Task Implements ISalaryService.UpdateEmployeeSalaryAsync
+        Throw New NotImplementedException()
+    End Function
+
+    Public Function UpdateSalaryAsync(salaryModel As SalaryModel) As Task Implements ISalaryService.UpdateSalaryAsync
+        Throw New NotImplementedException()
+    End Function
+
+    Public Async Function FindSalaryAsync(salaryId As Integer?) As Task(Of SalaryModel) Implements ISalaryService.FindSalaryAsync
+        Return Await FindByIdAsync(salaryId)
+    End Function
 End Class

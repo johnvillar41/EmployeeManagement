@@ -41,5 +41,57 @@ Namespace Controllers
         Function CreateForm() As ActionResult
             Return View()
         End Function
+
+        Async Function UpdateForm(salaryId? As Integer) As Task(Of ActionResult)
+            If salaryId Is Nothing Then
+                Return RedirectToAction(NameOf(Index))
+            End If
+
+            Dim salaryModel As SalaryModel = Await _salaryService.FindSalaryAsync(salaryId)
+            Dim salaryViewModel As SalaryViewModel = New SalaryViewModel() With {
+                .BaseNet = salaryModel.BaseNet,
+                .DateCreated = salaryModel.DateCreated,
+                .Id = salaryModel.Id,
+                .Name = salaryModel.Name
+            }
+            Return View(salaryViewModel)
+        End Function
+
+        <HttpPost>
+        <ValidateAntiForgeryToken>
+        Async Function Update(salary As SalaryViewModel) As Task(Of ActionResult)
+            If ModelState.IsValid Then
+                Dim salaryModel = New SalaryModel() With {
+                    .BaseNet = salary.BaseNet,
+                    .DateCreated = salary.DateCreated,
+                    .Name = salary.Name,
+                    .Id = salary.Id
+                }
+                Await _salaryService.UpdateSalaryAsync(salaryModel)
+                Return RedirectToAction(NameOf(Index))
+            End If
+
+            Return RedirectToAction(NameOf(UpdateForm))
+        End Function
+
+        <HttpPost>
+        <ValidateAntiForgeryToken>
+        Async Function Update(employeeSalary As EmployeeSalaryViewModel) As Task(Of ActionResult)
+            If ModelState.IsValid Then
+                Dim employeeSalaryModel = New EmployeeSalaryModel() With {
+                    .Allowance = employeeSalary.Allowance,
+                    .Deductions = employeeSalary.Deductions,
+                    .EmployeeId = employeeSalary.EmployeeId,
+                    .NumberOfAbsent = employeeSalary.NumberOfAbsent,
+                    .NumberOfLate = employeeSalary.NumberOfLate,
+                    .SalaryId = employeeSalary.SalaryId
+                }
+                employeeSalaryModel.Net -= (employeeSalaryModel.Deductions + employeeSalaryModel.Allowance)
+                Await _salaryService.UpdateEmployeeSalaryAsync(employeeSalaryModel)
+                Return RedirectToAction(NameOf(Index))
+            End If
+
+            Return RedirectToAction("../Employee/UpdateForm")
+        End Function
     End Class
 End Namespace
