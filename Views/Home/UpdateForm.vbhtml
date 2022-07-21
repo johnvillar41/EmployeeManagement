@@ -69,12 +69,13 @@ End Code
                     </div>
                 </div>
             </div>
+
+            @Html.ActionLink("Back to List", "Index")
+
         End Using
     </div>
 </div>
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 @Section Scripts
     @Scripts.Render("~/bundles/jqueryval")

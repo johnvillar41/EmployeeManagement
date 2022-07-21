@@ -4,8 +4,12 @@ Public Class HomeController
     Inherits System.Web.Mvc.Controller
 
     Private ReadOnly _employeeService As IEmployeeService
-    Public Sub New(employeeservice As IEmployeeService)
+    Private ReadOnly _workService As IWorkService
+    Public Sub New(
+                  employeeservice As IEmployeeService,
+                  workService As IWorkService)
         _employeeService = employeeservice
+        _workService = workService
     End Sub
 
     Async Function Index() As Task(Of ActionResult)
@@ -89,14 +93,16 @@ Public Class HomeController
 
     Async Function Detail(employeeId As Integer) As Task(Of ActionResult)
         Dim employeeDetail As EmployeeModel = Await _employeeService.FindEmployeeAsync(employeeId)
-        Dim employeeDetailViewModel As EmployeeViewModel = New EmployeeViewModel() With {
+        Dim employeeWork As IEnumerable(Of WorkModel) = Await _workService.FetchWorksAsync(employeeId)
+        Dim employeeDetailViewModel As EmployeeDetailViewModel = New EmployeeDetailViewModel() With {
             .Id = employeeDetail.Id,
             .Name = employeeDetail.Name,
             .Age = employeeDetail.Age,
             .Salary = employeeDetail.Salary,
             .Address = employeeDetail.Address,
             .BirthDate = employeeDetail.BirthDate,
-            .IsActive = employeeDetail.IsActive
+            .IsActive = employeeDetail.IsActive,
+            .NumberOfWork = employeeWork.Count()
         }
         Return View(NameOf(Detail), employeeDetailViewModel)
     End Function

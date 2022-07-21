@@ -212,6 +212,7 @@
     <Compile Include="Services\Interfaces\IWorkService.vb" />
     <Compile Include="UnityBootstrapper.vb" />
     <Compile Include="ViewModels\DisplayWorkViewModel.vb" />
+    <Compile Include="ViewModels\EmployeeDetailViewModel.vb" />
     <Compile Include="ViewModels\EmployeeViewModel.vb" />
     <Compile Include="ViewModels\WorkViewModel.vb" />
   </ItemGroup>
