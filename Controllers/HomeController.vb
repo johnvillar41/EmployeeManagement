@@ -18,7 +18,6 @@ Public Class HomeController
             .Id = model.Id,
             .Name = model.Name,
             .Age = model.Age,
-            .Salary = model.Salary,
             .Address = model.Address,
             .BirthDate = model.BirthDate,
             .IsActive = model.IsActive
@@ -42,7 +41,6 @@ Public Class HomeController
                 .Id = employee.Id,
                 .IsActive = employee.IsActive,
                 .Name = employee.Name,
-                .Salary = employee.Salary,
                 .WorkLoad = Nothing
             }
             Await _employeeService.CreateNewEmployeeAsync(employeeModel)
@@ -63,7 +61,7 @@ Public Class HomeController
                 .Id = employee.Id,
                 .IsActive = employee.IsActive,
                 .Name = employee.Name,
-                .Salary = employee.Salary,
+                .SalaryId = employee.SalaryId,
                 .WorkLoad = Nothing
             }
             Await _employeeService.ModifyEmployeeAsync(employeeModel)
@@ -79,7 +77,6 @@ Public Class HomeController
             .Id = employeeDetail.Id,
             .Name = employeeDetail.Name,
             .Age = employeeDetail.Age,
-            .Salary = employeeDetail.Salary,
             .Address = employeeDetail.Address,
             .BirthDate = employeeDetail.BirthDate,
             .IsActive = employeeDetail.IsActive
@@ -98,7 +95,7 @@ Public Class HomeController
             .Id = employeeDetail.Id,
             .Name = employeeDetail.Name,
             .Age = employeeDetail.Age,
-            .Salary = employeeDetail.Salary,
+            .Salary = employeeDetail.SalaryId,
             .Address = employeeDetail.Address,
             .BirthDate = employeeDetail.BirthDate,
             .IsActive = employeeDetail.IsActive,

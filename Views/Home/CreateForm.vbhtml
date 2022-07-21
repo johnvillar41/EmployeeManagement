@@ -22,15 +22,7 @@
                         @Html.EditorFor(Function(model) model.Age, New With {.htmlAttributes = New With {.class = "form-control"}})
                         @Html.ValidationMessageFor(Function(model) model.Age, "", New With {.class = "text-danger"})
                     </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(Function(model) model.Salary, htmlAttributes:=New With {.class = "control-label col-md-2"})
-                    <div class="col-md-12">
-                        @Html.EditorFor(Function(model) model.Salary, New With {.htmlAttributes = New With {.class = "form-control"}})
-                        @Html.ValidationMessageFor(Function(model) model.Salary, "", New With {.class = "text-danger"})
-                    </div>
-                </div>
+                </div>               
 
                 <div class="form-group">
                     @Html.LabelFor(Function(model) model.Address, htmlAttributes:=New With {.class = "control-label col-md-2"})

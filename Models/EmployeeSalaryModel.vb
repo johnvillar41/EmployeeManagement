@@ -1,6 +1,6 @@
 ﻿Public Class EmployeeSalaryModel
     Public Property Id As Integer
-    Public Property PayrollId As Integer
+    Public Property SalaryId As Integer
     Public Property EmployeeId As Integer
     Public Property NumberOfAbsent As Integer
     Public Property NumberOfLate As Integer

@@ -9,9 +9,6 @@ Public Class EmployeeViewModel
     <Required(ErrorMessage:="Age is Required")>
     Public Property Age As Integer
 
-    <Required(ErrorMessage:="Salary is Required")>
-    Public Property Salary As Decimal
-
     <Required(ErrorMessage:="Address is Required")>
     Public Property Address As String
 

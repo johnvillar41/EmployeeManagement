@@ -11,7 +11,6 @@
                     <thead>
                         <tr>
                             <td>@Html.LabelFor(Function(modelItem) modelItem.FirstOrDefault().Name)</td>
-                            <td>@Html.LabelFor(Function(modelItem) modelItem.FirstOrDefault().Salary)</td>
                             <td>@Html.LabelFor(Function(modelItem) modelItem.FirstOrDefault().Id)</td>
                             <td>@Html.LabelFor(Function(modelItem) modelItem.FirstOrDefault().BirthDate)</td>
                             <td>Actions</td>
@@ -21,9 +20,6 @@
                         @<tr>
                             <td>
                                 @Html.DisplayFor(Function(modelItem) item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(Function(modelItem) item.Salary)
                             </td>
                             <td>
                                 @Html.DisplayFor(Function(modelItem) item.Id)
