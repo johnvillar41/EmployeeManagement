@@ -205,7 +205,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Controllers\HomeController.vb" />
+    <Compile Include="Controllers\EmployeeController.vb" />
     <Compile Include="Services\Implementations\EmployeeService.vb" />
     <Compile Include="Services\Implementations\Repository.vb" />
     <Compile Include="Services\Implementations\WorkService.vb" />
@@ -357,12 +357,12 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Home\CreateForm.vbhtml" />
-    <Content Include="Views\Home\Detail.vbhtml" />
-    <Content Include="Views\Home\UpdateForm.vbhtml" />
+    <Content Include="Views\Employee\CreateForm.vbhtml" />
+    <Content Include="Views\Employee\Detail.vbhtml" />
+    <Content Include="Views\Employee\UpdateForm.vbhtml" />
     <Content Include="Views\Work\Index.vbhtml" />
     <Content Include="Views\Work\CreateForm.vbhtml" />
-    <Content Include="Views\Home\_PersonalDetailPartial.vbhtml" />
+    <Content Include="Views\Employee\_PersonalDetailPartial.vbhtml" />
     <Content Include="Views\Salary\_EmployeeSalaryPartial.vbhtml" />
   </ItemGroup>
   <ItemGroup>
@@ -384,7 +384,7 @@
     </Content>
     <Content Include="Content\Site.css" />
     <Content Include="Views\_ViewStart.vbhtml" />
-    <Content Include="Views\Home\Index.vbhtml" />
+    <Content Include="Views\Employee\Index.vbhtml" />
     <Content Include="Views\Shared\Error.vbhtml" />
     <Content Include="Views\Shared\_Layout.vbhtml" />
     <Content Include="Views\Web.config" />

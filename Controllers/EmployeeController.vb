@@ -1,6 +1,6 @@
 ﻿Imports System.Threading.Tasks
 
-Public Class HomeController
+Public Class EmployeeController
     Inherits System.Web.Mvc.Controller
 
     Private ReadOnly _employeeService As IEmployeeService
