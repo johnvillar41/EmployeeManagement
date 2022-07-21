@@ -7,8 +7,12 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body class="my-4">
-
+<body>
+    <nav class="navbar navbar-light bg-light mb-4 shadow-sm">
+        <div class="container">
+            @Html.ActionLink("Employee Management System", "Index", Nothing, New With {.class = "navbar-brand"})
+        </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
     </div>

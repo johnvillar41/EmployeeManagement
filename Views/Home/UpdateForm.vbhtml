@@ -4,7 +4,7 @@
 End Code
 
 
-<div class="jumbotron shadow-sm rounded">
+<div class="jumbotron shadow-sm rounded bg-light">
     <div class="container">
         @Using (Html.BeginForm("Update", "Home", FormMethod.Post))
             @Html.AntiForgeryToken()
