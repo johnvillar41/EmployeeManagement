@@ -22,6 +22,22 @@ Namespace Controllers
             Return View(salaryViewModels)
         End Function
 
+        <HttpPost>
+        <ValidateAntiForgeryToken>
+        Async Function Create(salary As SalaryViewModel) As Task(Of ActionResult)
+            If ModelState.IsValid Then
+                Dim salaryModel = New SalaryModel() With {
+                    .BaseNet = salary.BaseNet,
+                    .DateCreated = salary.DateCreated,
+                    .Name = salary.Name
+                }
+                Await _salaryService.CreateSalaryAsync(salaryModel)
+                Return RedirectToAction(NameOf(Index))
+            End If
+
+            Return RedirectToAction(NameOf(CreateForm))
+        End Function
+
         Function CreateForm() As ActionResult
             Return View()
         End Function

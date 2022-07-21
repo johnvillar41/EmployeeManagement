@@ -5,7 +5,7 @@
         <h3>Create Salary</h3>
         <hr />
         <div class="shadow-sm p-4 rounded">
-            @Using (Html.BeginForm())
+            @Using (Html.BeginForm("Create", "Salary", FormMethod.Post))
                 @Html.AntiForgeryToken()
                 @<div class="form-horizontal">
                     @Html.ValidationSummary(True, "", New With {.class = "text-danger"})
@@ -20,7 +20,7 @@
                     <div class="form-group">
                         @Html.LabelFor(Function(model) model.DateCreated, htmlAttributes:=New With {.class = "control-label col-md-2"})
                         <div class="col-md-12">
-                            @Html.EditorFor(Function(model) model.DateCreated, New With {.htmlAttributes = New With {.class = "form-control"}})
+                            @Html.EditorFor(Function(model) model.DateCreated, New With {.htmlAttributes = New With {.class = "form-control", .type = "date"}})
                             @Html.ValidationMessageFor(Function(model) model.DateCreated, "", New With {.class = "text-danger"})
                         </div>
                     </div>

@@ -21,7 +21,7 @@
         </div>
         <hr />
         <div>
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "Index", "Employee", Nothing, Nothing)
         </div>
     </div>
 </div>
