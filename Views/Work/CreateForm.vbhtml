@@ -3,7 +3,7 @@
 @Using (Html.BeginForm("Create", "Work", FormMethod.Post))
     @Html.AntiForgeryToken()
 
-    @<div class="bg-light shadow rounded jumbotron">
+    @<div class="bg-light shadow-sm rounded jumbotron">
         @Html.HiddenFor(Of Integer)(Function(model) model.EmployeeId)
         <div class="form-horizontal">
             <div class="form-group">

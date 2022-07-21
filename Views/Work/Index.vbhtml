@@ -12,7 +12,7 @@
                         <div Class="card-body">
                             <h5 Class="card-title">@item.Title</h5>
                             <h6 Class="card-subtitle mb-2 text-muted">@item.Id</h6>
-                            <p Class="card-text">@item.Description</p>
+                            <p Class="card-text text-truncate">@item.Description</p>
                             @Html.ActionLink("Delete", "Delete", New With {.workId = item.Id, .employeeId = item.EmployeeId}, New With {.class = "text-warning"})
                         </div>
                     </div>
