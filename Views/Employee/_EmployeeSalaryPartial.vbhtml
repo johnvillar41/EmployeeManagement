@@ -11,7 +11,6 @@
                     @Html.ValidationSummary(True, "", New With {.class = "text-danger"})
                     @Html.HiddenFor(Function(model) model.Id)
                     @Html.HiddenFor(Function(model) model.EmployeeId)
-                    @Html.HiddenFor(Function(model) model.SalaryId)
 
                     <div class="form-group">
                         @Html.LabelFor(Function(model) model.Allowance, htmlAttributes:=New With {.class = "control-label col-md-2"})
@@ -42,6 +41,18 @@
                         <div class="col-md-12">
                             @Html.EditorFor(Function(model) model.NumberOfLate, New With {.htmlAttributes = New With {.class = "form-control"}})
                             @Html.ValidationMessageFor(Function(model) model.NumberOfLate, "", New With {.class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row ">
+                            <div class="col-md-6 my-auto">
+                                @Html.DisplayFor(Function(model) model.SalaryName)
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(Function(model) model.SalaryTypes, htmlAttributes:=New With {.class = "control-label col-md-2"})
+                                @Html.DropDownList(NameOf(Model.SalaryId), Model.SalaryTypes.Select(Function(model) New SelectListItem With {.Text = model.Name, .Value = model.Id}), New With {.class = "form-control"})
+                                @Html.ValidationMessageFor(Function(model) model.SalaryTypes, "", New With {.class = "text-danger"})
+                            </div>
                         </div>
                     </div>
                     <div class="form-group mt-4">

@@ -87,6 +87,12 @@ Public Class EmployeeController
         If salary Is Nothing Then
             salary = New SalaryModel()
         End If
+
+        Dim salaryTypes As IEnumerable(Of SalaryModel) = Await _employeeService.FetchSalaryTypes()
+        If salaryTypes Is Nothing Then
+            salaryTypes = New List(Of SalaryModel)
+        End If
+
         Dim employeeSalaryViewModel As EmployeeSalaryViewModel = New EmployeeSalaryViewModel() With {
             .Allowance = employeeSalary.Allowance,
             .Deductions = employeeSalary.Deductions,
@@ -95,7 +101,13 @@ Public Class EmployeeController
             .BaseSalary = salary.BaseNet,
             .NumberOfAbsent = employeeSalary.NumberOfAbsent,
             .NumberOfLate = employeeSalary.NumberOfLate,
-            .SalaryId = employeeSalary.SalaryId
+            .SalaryTypes = salaryTypes.Select(Function(model) New SalaryViewModel() With {
+                .Id = model.Id,
+                .BaseNet = model.BaseNet,
+                .DateCreated = model.DateCreated,
+                .Name = model.Name
+            }),
+            .SalaryName = salary.Name
         }
         Dim employeeUpdateViewModel As EmployeeUpdateViewModel = New EmployeeUpdateViewModel() With {
             .EmployeeViewModel = employeeViewModel,
@@ -142,6 +154,6 @@ Public Class EmployeeController
             Return RedirectToAction(NameOf(Index))
         End If
 
-        Return RedirectToAction("../Employee/UpdateForm")
+        Return RedirectToAction(NameOf(Index))
     End Function
 End Class

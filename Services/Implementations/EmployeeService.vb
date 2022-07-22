@@ -61,4 +61,8 @@ Public Class EmployeeService
     Public Async Function UpdateEmployeeSalaryAsync(employeeSalaryModel As EmployeeSalaryModel) As Task Implements IEmployeeService.UpdateEmployeeSalaryAsync
         Await _employeeSalaryRepo.UpdateAsync(employeeSalaryModel)
     End Function
+
+    Public Async Function FetchSalaryTypes() As Task(Of IEnumerable(Of SalaryModel)) Implements IEmployeeService.FetchSalaryTypes
+        Return Await _employeeSalaryRepo.SelectQueryAsync(Of SalaryModel)("SELECT * FROM SalaryTable", Nothing)
+    End Function
 End Class
