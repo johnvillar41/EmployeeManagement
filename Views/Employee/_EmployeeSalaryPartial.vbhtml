@@ -4,12 +4,14 @@
         <h2>Employee Salary Details</h2>
         <hr />
         <div class="rounded shadow-sm p-4">
-            @Using (Html.BeginForm("Update", "Salary", FormMethod.Post))
+            @Using (Html.BeginForm("UpdateEmployeeSalary", "Employee", FormMethod.Post))
                 @Html.AntiForgeryToken()
 
                 @<div class="form-horizontal">
                     @Html.ValidationSummary(True, "", New With {.class = "text-danger"})
                     @Html.HiddenFor(Function(model) model.Id)
+                    @Html.HiddenFor(Function(model) model.EmployeeId)
+                    @Html.HiddenFor(Function(model) model.SalaryId)
 
                     <div class="form-group">
                         @Html.LabelFor(Function(model) model.Allowance, htmlAttributes:=New With {.class = "control-label col-md-2"})

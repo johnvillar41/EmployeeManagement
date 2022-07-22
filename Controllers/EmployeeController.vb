@@ -123,4 +123,25 @@ Public Class EmployeeController
         }
         Return View(NameOf(Detail), employeeDetailViewModel)
     End Function
+
+    <HttpPost>
+    <ValidateAntiForgeryToken>
+    Async Function UpdateEmployeeSalary(employeeSalary As EmployeeSalaryViewModel) As Task(Of ActionResult)
+        If ModelState.IsValid Then
+            Dim employeeSalaryModel = New EmployeeSalaryModel() With {
+                .Allowance = employeeSalary.Allowance,
+                .Deductions = employeeSalary.Deductions,
+                .EmployeeId = employeeSalary.EmployeeId,
+                .NumberOfAbsent = employeeSalary.NumberOfAbsent,
+                .NumberOfLate = employeeSalary.NumberOfLate,
+                .SalaryId = employeeSalary.SalaryId,
+                .Id = employeeSalary.Id
+            }
+            employeeSalaryModel.Net -= (employeeSalaryModel.Deductions + employeeSalaryModel.Allowance)
+            Await _employeeService.UpdateEmployeeSalaryAsync(employeeSalaryModel)
+            Return RedirectToAction(NameOf(Index))
+        End If
+
+        Return RedirectToAction("../Employee/UpdateForm")
+    End Function
 End Class

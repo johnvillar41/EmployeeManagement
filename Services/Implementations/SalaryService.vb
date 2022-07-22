@@ -18,10 +18,6 @@ Public Class SalaryService
         Await AddAsync(salaryModel)
     End Function
 
-    Public Async Function UpdateEmployeeSalaryAsync(employeeSalaryModel As EmployeeSalaryModel) As Task Implements ISalaryService.UpdateEmployeeSalaryAsync
-        Throw New NotImplementedException()
-    End Function
-
     Public Function UpdateSalaryAsync(salaryModel As SalaryModel) As Task Implements ISalaryService.UpdateSalaryAsync
         Throw New NotImplementedException()
     End Function

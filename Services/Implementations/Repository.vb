@@ -11,7 +11,13 @@ Public Class Repository(Of T)
         _db = New SqlConnection(ConfigurationManager.ConnectionStrings("EmployeeDBConnection").ConnectionString)
     End Sub
 
-    Public Overridable ReadOnly Property GetTableName As String
+    Public Overridable ReadOnly Property GetTableName As String Implements IRepository(Of T).GetTableName
+        Get
+            Dim className As String = GetType(T).Name
+            Dim tableName = className.Replace("Model", "Table")
+            Return tableName
+        End Get
+    End Property
 
     Public Async Function AddAsync(dataObject As T) As Task Implements IAddRepository(Of T).AddAsync
         Dim tupleValue = BuildInsertQueryString(dataObject)

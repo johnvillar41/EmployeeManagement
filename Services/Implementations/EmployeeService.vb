@@ -14,11 +14,14 @@ Public Class EmployeeService
 
     Private ReadOnly _workRepo As IRepository(Of WorkModel)
     Private ReadOnly _salaryRepo As IRepository(Of SalaryModel)
+    Private ReadOnly _employeeSalaryRepo As IRepository(Of EmployeeSalaryModel)
     Public Sub New(
                   workRepo As IRepository(Of WorkModel),
-                  salaryRepo As IRepository(Of SalaryModel))
+                  salaryRepo As IRepository(Of SalaryModel),
+                  employeeSalaryRepo As IRepository(Of EmployeeSalaryModel))
         _workRepo = workRepo
         _salaryRepo = salaryRepo
+        _employeeSalaryRepo = employeeSalaryRepo
     End Sub
 
     Public Async Function CreateNewEmployeeAsync(employee As EmployeeModel) As Task Implements IEmployeeService.CreateNewEmployeeAsync
@@ -54,5 +57,8 @@ Public Class EmployeeService
     Public Async Function FindSalaryAsync(salaryId As Integer) As Task(Of SalaryModel) Implements IEmployeeService.FindSalaryAsync
         Dim salary = Await _salaryRepo.SelectQueryAsync(Of SalaryModel)("SELECT * FROM SalaryTable WHERE Id = @Id", New With {.Id = salaryId})
         Return salary.FirstOrDefault()
+    End Function
+    Public Async Function UpdateEmployeeSalaryAsync(employeeSalaryModel As EmployeeSalaryModel) As Task Implements IEmployeeService.UpdateEmployeeSalaryAsync
+        Await _employeeSalaryRepo.UpdateAsync(employeeSalaryModel)
     End Function
 End Class

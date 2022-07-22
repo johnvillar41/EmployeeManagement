@@ -8,6 +8,7 @@ Public Interface IRepository(Of T)
         IDeleteRepository(Of T),
         IQueryRepository
 
+    ReadOnly Property GetTableName As String
 
 End Interface
 Public Interface IQueryRepository

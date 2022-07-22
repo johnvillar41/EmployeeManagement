@@ -54,6 +54,7 @@ Public NotInheritable Class UnityBootstrapper
 		Dim container = New UnityContainer()
 		container.RegisterType(Of IRepository(Of WorkModel), Repository(Of WorkModel))
 		container.RegisterType(Of IRepository(Of SalaryModel), Repository(Of SalaryModel))
+		container.RegisterType(Of IRepository(Of EmployeeSalaryModel), Repository(Of EmployeeSalaryModel))
 		container.RegisterType(Of IEmployeeService, EmployeeService)
 		container.RegisterType(Of IWorkService, WorkService)
 		container.RegisterType(Of ISalaryService, SalaryService)

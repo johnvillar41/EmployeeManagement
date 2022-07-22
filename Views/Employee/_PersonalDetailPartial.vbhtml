@@ -4,7 +4,7 @@
         <h2>Personal Details</h2>
         <hr />
         <div class="shadow-sm rounded p-4">
-            @Using (Html.BeginForm("Update", "Home", FormMethod.Post))
+            @Using (Html.BeginForm("Update", "Employee", FormMethod.Post))
                 @Html.AntiForgeryToken()
 
                 @<div class="form-horizontal">

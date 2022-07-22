@@ -9,4 +9,5 @@ Public Interface IEmployeeService
     Function FetchNumberOfWorksAsync(employeeId As Integer) As Task(Of Integer)
     Function FindEmployeeSalaryAsync(employeeId As Integer) As Task(Of EmployeeSalaryModel)
     Function FindSalaryAsync(employeeId As Integer) As Task(Of SalaryModel)
+    Function UpdateEmployeeSalaryAsync(employeeSalaryModel As EmployeeSalaryModel) As Task
 End Interface

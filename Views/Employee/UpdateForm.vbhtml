@@ -8,7 +8,7 @@ End Code
         @Html.Partial("_PersonalDetailPartial", Model.EmployeeViewModel)
     </div>
     <div class="col">
-        @Html.Partial("../Salary/_EmployeeSalaryPartial", Model.EmployeeSalaryViewModel)
+        @Html.Partial("_EmployeeSalaryPartial", Model.EmployeeSalaryViewModel)
     </div>
 </div>
 
