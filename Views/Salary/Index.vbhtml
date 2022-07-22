@@ -33,7 +33,7 @@
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "UpdateForm", New With {.salaryId = item.Id}) |
-                            @Html.ActionLink("Delete", "Delete", New With {.id = item.Id})
+                            @Html.ActionLink("Delete", "Delete", New With {.salaryId = item.Id})
                         </td>
                     </tr>
                 Next

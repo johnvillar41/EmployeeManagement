@@ -58,8 +58,15 @@ Public Class EmployeeService
         Dim salary = Await _salaryRepo.SelectQueryAsync(Of SalaryModel)("SELECT * FROM SalaryTable WHERE Id = @Id", New With {.Id = salaryId})
         Return salary.FirstOrDefault()
     End Function
+
     Public Async Function UpdateEmployeeSalaryAsync(employeeSalaryModel As EmployeeSalaryModel) As Task Implements IEmployeeService.UpdateEmployeeSalaryAsync
-        Await _employeeSalaryRepo.UpdateAsync(employeeSalaryModel)
+        Dim employeeSalary = Await _employeeSalaryRepo.FindByIdAsync(employeeSalaryModel.Id)
+
+        If employeeSalary IsNot Nothing Then
+            Await _employeeSalaryRepo.UpdateAsync(employeeSalaryModel)
+            Return
+        End If
+        Await _employeeSalaryRepo.AddAsync(employeeSalaryModel)
     End Function
 
     Public Async Function FetchSalaryTypes() As Task(Of IEnumerable(Of SalaryModel)) Implements IEmployeeService.FetchSalaryTypes

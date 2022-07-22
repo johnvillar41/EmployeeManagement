@@ -5,4 +5,5 @@ Public Interface ISalaryService
     Function CreateSalaryAsync(salaryModel As SalaryModel) As Task
     Function UpdateSalaryAsync(salaryModel As SalaryModel) As Task
     Function FindSalaryAsync(salaryId As Integer?) As Task(Of SalaryModel)
+    Function DeleteSalaryAsync(salaryId As Integer?) As Task
 End Interface

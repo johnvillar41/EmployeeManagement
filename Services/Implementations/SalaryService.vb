@@ -25,4 +25,8 @@ Public Class SalaryService
     Public Async Function FindSalaryAsync(salaryId As Integer?) As Task(Of SalaryModel) Implements ISalaryService.FindSalaryAsync
         Return Await FindByIdAsync(salaryId)
     End Function
+
+    Public Async Function DeleteSalaryAsync(salaryId As Integer?) As Task Implements ISalaryService.DeleteSalaryAsync
+        Await DeleteAsync(salaryId)
+    End Function
 End Class

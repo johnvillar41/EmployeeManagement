@@ -42,6 +42,15 @@ Namespace Controllers
             Return View()
         End Function
 
+        Async Function Delete(salaryId? As Integer) As Task(Of ActionResult)
+            If salaryId Is Nothing Then
+                Return RedirectToAction(NameOf(Index))
+            End If
+
+            Await _salaryService.DeleteSalaryAsync(salaryId)
+            Return RedirectToAction(NameOf(Index))
+        End Function
+
         Async Function UpdateForm(salaryId? As Integer) As Task(Of ActionResult)
             If salaryId Is Nothing Then
                 Return RedirectToAction(NameOf(Index))

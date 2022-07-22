@@ -43,13 +43,15 @@
                             @Html.ValidationMessageFor(Function(model) model.NumberOfLate, "", New With {.class = "text-danger"})
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row ">
-                            <div class="col-md-6 my-auto">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <div class="col-md-12 my-auto">
                                 @Html.DisplayFor(Function(model) model.SalaryName)
                             </div>
-                            <div class="col-md-6">
-                                @Html.LabelFor(Function(model) model.SalaryTypes, htmlAttributes:=New With {.class = "control-label col-md-2"})
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
                                 @Html.DropDownList(NameOf(Model.SalaryId), Model.SalaryTypes.Select(Function(model) New SelectListItem With {.Text = model.Name, .Value = model.Id}), New With {.class = "form-control"})
                                 @Html.ValidationMessageFor(Function(model) model.SalaryTypes, "", New With {.class = "text-danger"})
                             </div>
@@ -60,6 +62,7 @@
                             <input type="submit" value="Save" class="btn btn-secondary btn-block" />
                         </div>
                     </div>
+
                     <hr />
                     <h5>Net Worth Details</h5>
                     <div class="card">
