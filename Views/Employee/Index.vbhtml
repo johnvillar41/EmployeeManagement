@@ -5,36 +5,24 @@
         @If Model.Count = 0 Then
             @<h1>Empty Collection</h1>
         Else
-            @<div class="table-responsive">
-                <Table Class="table">
-                    <thead>
-                        <tr>
-                            <td class="font-weight-bold">@Html.DisplayNameFor(Function(modelItem) modelItem.FirstOrDefault().Name)</td>
-                            <td class="font-weight-bold">@Html.DisplayNameFor(Function(modelItem) modelItem.FirstOrDefault().Id)</td>
-                            <td class="font-weight-bold">@Html.DisplayNameFor(Function(modelItem) modelItem.FirstOrDefault().BirthDate)</td>
-                            <td class="font-weight-bold">Actions</td>
-                        </tr>
-                    </thead>
-                    @For Each item In Model
-                        @<tr>
-                            <td>
-                                @Html.DisplayFor(Function(modelItem) item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(Function(modelItem) item.Id)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(Function(modelItem) item.BirthDate)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "UpdateForm", New With {.employeeId = item.Id}) |
-                                @Html.ActionLink("Details", "Detail", New With {.employeeId = item.Id}) |
-                                @Html.ActionLink("Delete", "Delete", New With {.employeeId = item.Id}) |
-                                @Html.ActionLink("Work Loads", "Index", "Work", New With {.employeeId = item.Id}, Nothing)
-                            </td>
-                        </tr>
-                    Next
-                </Table>
+            @<div class="row">
+                @For Each item In Model
+                    @<div class="col-md-3 h-100">
+                        <div Class="shadow-sm card">
+                            <div Class="card-body">
+                                <h5 Class="card-title">@item.Name</h5>
+                                <h6 Class="card-subtitle mb-2 text-muted">@item.Id</h6>
+                                <p Class="card-text">@item.Address</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="#" Class="card-link">@Html.ActionLink("Update", "UpdateForm", New With {.employeeId = item.Id}, New With {.class = "text-warning card-link"})</a>
+                                <a href="#" Class="card-link">@Html.ActionLink("Details", "Detail", New With {.employeeId = item.Id}, New With {.class = "text-warning card-link"})</a>
+                                <a href="#" Class="card-link">@Html.ActionLink("Work Loads", "Index", "Work", New With {.employeeId = item.Id}, New With {.class = "text-warning card-link"})</a>
+                                <a href="#" Class="card-link">@Html.ActionLink("Delete", "Delete", New With {.employeeId = item.Id}, New With {.class = "text-danger card-link"})</a>
+                            </div>
+                        </div>
+                    </div>
+                Next
             </div>
         End If
 
