@@ -152,6 +152,7 @@ Public Class EmployeeController
             }
             Dim salaryModel As SalaryModel = Await _employeeService.FindSalaryAsync(employeeSalaryModel.SalaryId)
             employeeSalaryModel.Net = salaryModel.BaseNet - Math.Abs(employeeSalaryModel.Allowance - employeeSalaryModel.Deductions)
+            employeeSalaryModel.Net -= (employeeSalaryModel.NumberOfLate * 20 + employeeSalaryModel.NumberOfAbsent * 100)
             Await _employeeService.UpdateEmployeeSalaryAsync(employeeSalaryModel)
             Return RedirectToAction(NameOf(Index))
         End If
