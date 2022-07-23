@@ -378,6 +378,7 @@
     <Content Include="Views\Salary\Index.vbhtml" />
     <Content Include="Views\Salary\CreateForm.vbhtml" />
     <Content Include="Views\Salary\UpdateForm.vbhtml" />
+    <Content Include="Views\EmployeeSalary\Index.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
@@ -405,7 +406,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\EmployeeSalary\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

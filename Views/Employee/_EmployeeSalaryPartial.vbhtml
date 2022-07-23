@@ -91,6 +91,11 @@
                             <input type="submit" value="Create Salary" class="btn btn-secondary btn-block" />
                         </div>
                     </div>
+                    <div class="form-group mt-4">
+                        <div class="col-md-offset-2 col-md-12">
+                            @Html.ActionLink("View Employee Salaries", "Index", "EmployeeSalary", New With {.employeeId = Model.EmployeeId}, New With {.class = "btn btn-secondary btn-block"})
+                        </div>
+                    </div>
 
                     <hr />
                     <h5>Net Worth Details</h5>

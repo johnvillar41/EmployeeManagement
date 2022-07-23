@@ -1,5 +1,6 @@
 ﻿Imports System.Threading.Tasks
 Imports System.Web.Mvc
+Imports EmployeeManagement.EmployeeSalaryViewModel
 
 Namespace Controllers
     Public Class EmployeeSalaryController
@@ -24,7 +25,7 @@ Namespace Controllers
                 .Net = model.Net,
                 .NumberOfAbsent = model.NumberOfAbsent,
                 .NumberOfLate = model.NumberOfLate,
-                .Month = model.Month,
+                .Month = [Enum].Parse(GetType(MonthType), model.Month),
                 .Year = model.Year
             })
             Return View(employeeSalaryViewModels)
