@@ -99,6 +99,7 @@ Public Class EmployeeController
             .EmployeeId = employeeSalary.EmployeeId,
             .Id = employeeSalary.Id,
             .BaseSalary = salary.BaseNet,
+            .Net = employeeSalary.Net,
             .NumberOfAbsent = employeeSalary.NumberOfAbsent,
             .NumberOfLate = employeeSalary.NumberOfLate,
             .SalaryTypes = salaryTypes.Select(Function(model) New SalaryViewModel() With {
@@ -149,7 +150,8 @@ Public Class EmployeeController
                 .SalaryId = employeeSalary.SalaryId,
                 .Id = employeeSalary.Id
             }
-            employeeSalaryModel.Net -= (employeeSalaryModel.Deductions + employeeSalaryModel.Allowance)
+            Dim salaryModel As SalaryModel = Await _employeeService.FindSalaryAsync(employeeSalaryModel.SalaryId)
+            employeeSalaryModel.Net = salaryModel.BaseNet - Math.Abs(employeeSalaryModel.Allowance - employeeSalaryModel.Deductions)
             Await _employeeService.UpdateEmployeeSalaryAsync(employeeSalaryModel)
             Return RedirectToAction(NameOf(Index))
         End If
