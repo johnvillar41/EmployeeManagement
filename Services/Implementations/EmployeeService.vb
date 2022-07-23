@@ -66,4 +66,14 @@ Public Class EmployeeService
     Public Async Function FetchSalaryTypes() As Task(Of IEnumerable(Of SalaryModel)) Implements IEmployeeService.FetchSalaryTypes
         Return Await _employeeSalaryRepo.SelectQueryAsync(Of SalaryModel)("SELECT * FROM SalaryTable", Nothing)
     End Function
+
+    Public Async Function AddEmployeeSalaryAsync(employeeSalaryModel As EmployeeSalaryModel) As Task Implements IEmployeeService.AddEmployeeSalaryAsync
+        Dim employeeSalary = Await _employeeSalaryRepo.SelectQueryAsync(Of EmployeeSalaryModel)("SELECT * FROM EmployeeSalaryTable WHERE Month = @Month AND Year = @Year", New With {.Month = employeeSalaryModel.Month, .Year = employeeSalaryModel.Year})
+        If (employeeSalary.Count = 0) Then
+            Await _employeeSalaryRepo.AddAsync(employeeSalaryModel)
+            Return
+        End If
+
+        Throw New SalaryException($"Cannot add salary for month:{employeeSalaryModel.Month} and year:{employeeSalaryModel.Year}. Data already exist")
+    End Function
 End Class

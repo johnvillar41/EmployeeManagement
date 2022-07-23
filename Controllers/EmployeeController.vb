@@ -69,7 +69,13 @@ Public Class EmployeeController
         Return View(NameOf(UpdateForm), employee)
     End Function
 
-    Async Function UpdateForm(employeeId As Integer) As Task(Of ActionResult)
+    Async Function UpdateForm(employeeId As Integer, errorMessage As String) As Task(Of ActionResult)
+        If errorMessage IsNot Nothing Then
+            ViewBag.ErrorMessage = errorMessage
+        Else
+            ViewBag.ErrorMessage = Nothing
+        End If
+
         Dim employeeDetail As EmployeeModel = Await _employeeService.FindEmployeeAsync(employeeId)
         Dim employeeViewModel As EmployeeViewModel = New EmployeeViewModel() With {
             .Id = employeeDetail.Id,
@@ -142,7 +148,7 @@ Public Class EmployeeController
 
     <HttpPost>
     <ValidateAntiForgeryToken>
-    Async Function UpdateEmployeeSalary(employeeSalary As EmployeeSalaryViewModel) As Task(Of ActionResult)
+    Async Function AddEmployeeSalary(employeeSalary As EmployeeSalaryViewModel) As Task(Of ActionResult)
         If ModelState.IsValid Then
             Dim employeeSalaryModel = New EmployeeSalaryModel() With {
                 .Allowance = employeeSalary.Allowance,
@@ -158,7 +164,12 @@ Public Class EmployeeController
             Dim salaryModel As SalaryModel = Await _employeeService.FindSalaryAsync(employeeSalaryModel.SalaryId)
             employeeSalaryModel.Net = salaryModel.BaseNet - Math.Abs(employeeSalaryModel.Allowance - employeeSalaryModel.Deductions)
             employeeSalaryModel.Net -= (employeeSalaryModel.NumberOfLate * 20 + employeeSalaryModel.NumberOfAbsent * 100)
-            Await _employeeService.UpdateEmployeeSalaryAsync(employeeSalaryModel)
+            Try
+                Await _employeeService.AddEmployeeSalaryAsync(employeeSalaryModel)
+            Catch ex As SalaryException
+                Return RedirectToAction(NameOf(UpdateForm), New With {.employeeId = employeeSalary.EmployeeId, .errorMessage = ex.Message})
+            End Try
+
             Return RedirectToAction(NameOf(Index))
         End If
 

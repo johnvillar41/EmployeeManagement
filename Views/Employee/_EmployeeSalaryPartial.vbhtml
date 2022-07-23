@@ -5,7 +5,13 @@
         <h2> Employee Salary Details</h2>
         <hr />
         <div Class="rounded shadow-sm p-4">
-            @Using (Html.BeginForm("UpdateEmployeeSalary", "Employee", FormMethod.Post))
+            @If ViewBag.ErrorMessage IsNot Nothing Then
+                @<div Class="alert alert-danger" role="alert">
+                    @ViewBag.ErrorMessage
+                </div>
+            End If
+
+            @Using (Html.BeginForm("AddEmployeeSalary", "Employee", FormMethod.Post))
                 @Html.AntiForgeryToken()
 
                 @<div class="form-horizontal">
@@ -82,7 +88,7 @@
                     </div>
                     <div class="form-group mt-4">
                         <div class="col-md-offset-2 col-md-12">
-                            <input type="submit" value="Save" class="btn btn-secondary btn-block" />
+                            <input type="submit" value="Create Salary" class="btn btn-secondary btn-block" />
                         </div>
                     </div>
 

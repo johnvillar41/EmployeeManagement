@@ -186,6 +186,7 @@
     <Compile Include="App_Start\RouteConfig.vb" />
     <Compile Include="Controllers\SalaryController.vb" />
     <Compile Include="Controllers\WorkController.vb" />
+    <Compile Include="Exceptions\SalaryException.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

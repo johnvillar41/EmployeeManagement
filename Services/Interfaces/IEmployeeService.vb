@@ -11,4 +11,5 @@ Public Interface IEmployeeService
     Function FindSalaryAsync(employeeId As Integer) As Task(Of SalaryModel)
     Function UpdateEmployeeSalaryAsync(employeeSalaryModel As EmployeeSalaryModel) As Task
     Function FetchSalaryTypes() As Task(Of IEnumerable(Of SalaryModel))
+    Function AddEmployeeSalaryAsync(employeeSalaryModel As EmployeeSalaryModel) As Task
 End Interface
