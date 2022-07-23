@@ -68,12 +68,12 @@ Public Class EmployeeService
     End Function
 
     Public Async Function AddEmployeeSalaryAsync(employeeSalaryModel As EmployeeSalaryModel) As Task Implements IEmployeeService.AddEmployeeSalaryAsync
-        Dim employeeSalary = Await _employeeSalaryRepo.SelectQueryAsync(Of EmployeeSalaryModel)("SELECT * FROM EmployeeSalaryTable WHERE Month = @Month AND Year = @Year", New With {.Month = employeeSalaryModel.Month, .Year = employeeSalaryModel.Year})
+        Dim employeeSalary = Await _employeeSalaryRepo.SelectQueryAsync(Of EmployeeSalaryModel)("SELECT * FROM EmployeeSalaryTable WHERE Month = @Month AND Year = @Year AND EmployeeId = @EmployeeId", New With {.Month = employeeSalaryModel.Month, .Year = employeeSalaryModel.Year, .EmployeeId = employeeSalaryModel.EmployeeId})
         If (employeeSalary.Count = 0) Then
             Await _employeeSalaryRepo.AddAsync(employeeSalaryModel)
             Return
         End If
 
-        Throw New SalaryException($"Cannot add salary for month:{employeeSalaryModel.Month} and year:{employeeSalaryModel.Year}. Data already exist")
+        Throw New SalaryException($"Cannot add salary for month:{employeeSalaryModel.Month} and year:{employeeSalaryModel.Year} and employeeId:{employeeSalaryModel.EmployeeId}. Data already exist")
     End Function
 End Class
