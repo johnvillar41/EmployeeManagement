@@ -6,12 +6,6 @@ Public Class EmployeeService
     Inherits Repository(Of EmployeeModel)
     Implements IEmployeeService
 
-    Public Overrides ReadOnly Property GetTableName As String
-        Get
-            Return "EmployeeTable"
-        End Get
-    End Property
-
     Private ReadOnly _workRepo As IRepository(Of WorkModel)
     Private ReadOnly _salaryRepo As IRepository(Of SalaryModel)
     Private ReadOnly _employeeSalaryRepo As IRepository(Of EmployeeSalaryModel)

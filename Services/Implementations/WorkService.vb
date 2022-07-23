@@ -4,12 +4,6 @@ Public Class WorkService
     Inherits Repository(Of WorkModel)
     Implements IWorkService
 
-    Public Overrides ReadOnly Property GetTableName As String
-        Get
-            Return "WorkTable"
-        End Get
-    End Property
-
     Public Async Function AddWorkAsync(work As WorkModel) As Task Implements IWorkService.AddWorkAsync
         Await AddAsync(work)
     End Function
