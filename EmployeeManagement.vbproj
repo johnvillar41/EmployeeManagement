@@ -184,6 +184,7 @@
     <Compile Include="App_Start\BundleConfig.vb" />
     <Compile Include="App_Start\FilterConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
+    <Compile Include="Controllers\EmployeeSalaryController.vb" />
     <Compile Include="Controllers\SalaryController.vb" />
     <Compile Include="Controllers\WorkController.vb" />
     <Compile Include="Exceptions\SalaryException.vb" />
@@ -211,15 +212,18 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Controllers\EmployeeController.vb" />
+    <Compile Include="Services\Implementations\EmployeeSalaryService.vb" />
     <Compile Include="Services\Implementations\EmployeeService.vb" />
     <Compile Include="Services\Implementations\Repository.vb" />
     <Compile Include="Services\Implementations\SalaryService.vb" />
     <Compile Include="Services\Implementations\WorkService.vb" />
+    <Compile Include="Services\Interfaces\IEmployeeSalaryService.vb" />
     <Compile Include="Services\Interfaces\IEmployeeService.vb" />
     <Compile Include="Services\Interfaces\IRepository.vb" />
     <Compile Include="Services\Interfaces\ISalaryService.vb" />
     <Compile Include="Services\Interfaces\IWorkService.vb" />
     <Compile Include="UnityBootstrapper.vb" />
+    <Compile Include="ViewModels\DisplayEmployeeSalaryViewModel.vb" />
     <Compile Include="ViewModels\DisplayWorkViewModel.vb" />
     <Compile Include="ViewModels\EmployeeDetailViewModel.vb" />
     <Compile Include="ViewModels\EmployeeSalaryViewModel.vb" />
@@ -401,6 +405,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\EmployeeSalary\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
