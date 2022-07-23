@@ -1,6 +1,22 @@
 ﻿Imports System.ComponentModel
+Imports EmployeeManagement.EmployeeSalaryModel
 
 Public Class EmployeeSalaryViewModel
+    Public Enum MonthType
+        January
+        February
+        March
+        April
+        May
+        June
+        July
+        August
+        September
+        October
+        November
+        December
+    End Enum
+
     Public Property Id As Integer
     Public Property EmployeeId As Integer
     Public Property NumberOfAbsent As Integer
@@ -16,4 +32,8 @@ Public Class EmployeeSalaryViewModel
 
     <DisplayName("Net Salary")>
     Public Property Net As Decimal
+
+    <DisplayName("Month")>
+    Public Property Month As MonthType
+    Public Property Year As Integer
 End Class

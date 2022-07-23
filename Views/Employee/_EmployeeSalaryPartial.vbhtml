@@ -1,9 +1,10 @@
 ﻿@ModelType EmployeeManagement.EmployeeSalaryViewModel
-<div class="h-100 jumbotron shadow-sm rounded bg-light">
-    <div class="container">
-        <h2>Employee Salary Details</h2>
+
+<div Class="h-100 jumbotron shadow-sm rounded bg-light">
+    <div Class="container">
+        <h2> Employee Salary Details</h2>
         <hr />
-        <div class="rounded shadow-sm p-4">
+        <div Class="rounded shadow-sm p-4">
             @Using (Html.BeginForm("UpdateEmployeeSalary", "Employee", FormMethod.Post))
                 @Html.AntiForgeryToken()
 
@@ -43,6 +44,28 @@
                             @Html.ValidationMessageFor(Function(model) model.NumberOfLate, "", New With {.class = "text-danger"})
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(Function(model) model.Year, htmlAttributes:=New With {.class = "control-label col-md-2"})
+                        <div class="col-md-12">
+                            @Html.EditorFor(Function(model) model.Year, New With {.htmlAttributes = New With {.class = "form-control", .type = "number", .min = "1900", .max = "2099", .step = "1", .value = "2022"}})
+                            @Html.ValidationMessageFor(Function(model) model.Year, "", New With {.class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <div class="col-md-12 my-auto">
+                                @Html.DisplayFor(Function(model) model.Month)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.DropDownList(NameOf(Model.Month), [Enum].GetValues(GetType(EmployeeManagement.EmployeeSalaryViewModel.MonthType)).Cast(Of EmployeeManagement.EmployeeSalaryViewModel.MonthType)().ToList().Select(Function(model) New SelectListItem With {.Text = model.ToString(), .Value = model.ToString()}), New With {.class = "form-control"})
+                                @Html.ValidationMessageFor(Function(model) model.Month, "", New With {.class = "text-danger"})
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-inline">
                         <div class="form-group">
                             <div class="col-md-12 my-auto">

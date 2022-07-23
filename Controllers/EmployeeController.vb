@@ -1,4 +1,5 @@
 ﻿Imports System.Threading.Tasks
+Imports EmployeeManagement.EmployeeSalaryViewModel
 
 Public Class EmployeeController
     Inherits System.Web.Mvc.Controller
@@ -108,7 +109,9 @@ Public Class EmployeeController
                 .DateCreated = model.DateCreated,
                 .Name = model.Name
             }),
-            .SalaryName = salary.Name
+            .SalaryName = salary.Name,
+            .Month = [Enum].Parse(GetType(MonthType), employeeSalary.Month),
+            .Year = employeeSalary.Year
         }
         Dim employeeUpdateViewModel As EmployeeUpdateViewModel = New EmployeeUpdateViewModel() With {
             .EmployeeViewModel = employeeViewModel,
@@ -148,7 +151,9 @@ Public Class EmployeeController
                 .NumberOfAbsent = employeeSalary.NumberOfAbsent,
                 .NumberOfLate = employeeSalary.NumberOfLate,
                 .SalaryId = employeeSalary.SalaryId,
-                .Id = employeeSalary.Id
+                .Id = employeeSalary.Id,
+                .Month = [Enum].GetName(employeeSalary.Month.GetType(), employeeSalary.Month),
+                .Year = employeeSalary.Year
             }
             Dim salaryModel As SalaryModel = Await _employeeService.FindSalaryAsync(employeeSalaryModel.SalaryId)
             employeeSalaryModel.Net = salaryModel.BaseNet - Math.Abs(employeeSalaryModel.Allowance - employeeSalaryModel.Deductions)
