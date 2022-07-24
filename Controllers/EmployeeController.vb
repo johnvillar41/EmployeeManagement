@@ -27,15 +27,7 @@ Public Class EmployeeController
     <ValidateAntiForgeryToken>
     Async Function Create(employee As EmployeeViewModel) As Task(Of ActionResult)
         If ModelState.IsValid Then
-            Dim employeeModel = New EmployeeModel() With {
-                .Address = employee.Address,
-                .Age = employee.Age,
-                .BirthDate = employee.BirthDate,
-                .Id = employee.Id,
-                .IsActive = employee.IsActive,
-                .Name = employee.Name,
-                .WorkLoad = Nothing
-            }
+            Dim employeeModel = _mapper.MapObjects(Of EmployeeModel, EmployeeViewModel)(New EmployeeModel(), employee)
             Await _employeeService.CreateNewEmployeeAsync(employeeModel)
             Return RedirectToAction(NameOf(Index))
         End If
@@ -45,18 +37,9 @@ Public Class EmployeeController
 
     <HttpPost>
     <ValidateAntiForgeryToken>
-    Async Function Update(employee As EmployeeModel) As Task(Of ActionResult)
+    Async Function Update(employee As EmployeeViewModel) As Task(Of ActionResult)
         If ModelState.IsValid Then
-            Dim employeeModel = New EmployeeModel() With {
-                .Address = employee.Address,
-                .Age = employee.Age,
-                .BirthDate = employee.BirthDate,
-                .Id = employee.Id,
-                .IsActive = employee.IsActive,
-                .Name = employee.Name,
-                .SalaryId = employee.SalaryId,
-                .WorkLoad = Nothing
-            }
+            Dim employeeModel = _mapper.MapObjects(Of EmployeeModel, EmployeeViewModel)(New EmployeeModel(), employee)
             Await _employeeService.ModifyEmployeeAsync(employeeModel)
             Return RedirectToAction(NameOf(Index))
         End If
@@ -72,14 +55,7 @@ Public Class EmployeeController
         End If
 
         Dim employeeDetail As EmployeeModel = Await _employeeService.FindEmployeeAsync(employeeId)
-        Dim employeeViewModel As EmployeeViewModel = New EmployeeViewModel() With {
-            .Id = employeeDetail.Id,
-            .Name = employeeDetail.Name,
-            .Age = employeeDetail.Age,
-            .Address = employeeDetail.Address,
-            .BirthDate = employeeDetail.BirthDate,
-            .IsActive = employeeDetail.IsActive
-        }
+        Dim employeeViewModel As EmployeeViewModel = _mapper.MapObjects(Of EmployeeViewModel, EmployeeModel)(New EmployeeViewModel(), employeeDetail)
         Dim employeeSalary As EmployeeSalaryModel = Await _employeeService.FindEmployeeSalaryAsync(employeeId)
         If employeeSalary Is Nothing Then
             employeeSalary = New EmployeeSalaryModel()
@@ -128,11 +104,15 @@ Public Class EmployeeController
     Async Function Detail(employeeId As Integer) As Task(Of ActionResult)
         Dim employeeDetail As EmployeeModel = Await _employeeService.FindEmployeeAsync(employeeId)
         Dim employeeNumberWork As Integer = Await _employeeService.FetchNumberOfWorksAsync(employeeId)
+        Dim salary As SalaryModel = Await _employeeService.FindSalaryAsync(employeeDetail.SalaryId)
+        If salary Is Nothing Then
+            salary = New SalaryModel()
+        End If
         Dim employeeDetailViewModel As EmployeeDetailViewModel = New EmployeeDetailViewModel() With {
             .Id = employeeDetail.Id,
             .Name = employeeDetail.Name,
             .Age = employeeDetail.Age,
-            .Salary = employeeDetail.SalaryId,
+            .Salary = salary.BaseNet,
             .Address = employeeDetail.Address,
             .BirthDate = employeeDetail.BirthDate,
             .IsActive = employeeDetail.IsActive,
