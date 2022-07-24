@@ -17,35 +17,29 @@ Namespace Controllers
             End If
 
             Dim employeeSalaries = Await _employeeSalaryService.FetchAllEmployeeSalaryAsync(employeeId)
-            Dim employeeSalaryViewModels = employeeSalaries.Select(Function(model) New DisplayEmployeeSalaryViewModel() With {
-                .Id = model.Id,
-                .EmployeeId = model.EmployeeId,
-                .SalaryId = model.SalaryId,
-                .Allowance = model.Allowance,
-                .Net = model.Net,
-                .NumberOfAbsent = model.NumberOfAbsent,
-                .NumberOfLate = model.NumberOfLate,
-                .Month = [Enum].Parse(GetType(MonthType), model.Month),
-                .Year = model.Year
-            })
+            Dim employeeSalaryViewModels As IEnumerable(Of DisplayEmployeeSalaryViewModel) = MapToDisplayEmployeeSalary(employeeSalaries)
             Return View(employeeSalaryViewModels)
         End Function
 
         Async Function Sort(year As Integer, employeeId As Integer) As Task(Of ActionResult)
             Dim employeeSalaries = Await _employeeSalaryService.FetchAllSalaryGivenAYearAsync(year, employeeId)
-            Dim employeeSalaryViewModels = employeeSalaries.Select(Function(model) New DisplayEmployeeSalaryViewModel() With {
-                .Id = model.Id,
-                .EmployeeId = model.EmployeeId,
-                .SalaryId = model.SalaryId,
-                .Allowance = model.Allowance,
-                .Net = model.Net,
-                .NumberOfAbsent = model.NumberOfAbsent,
-                .NumberOfLate = model.NumberOfLate,
-                .Month = [Enum].Parse(GetType(MonthType), model.Month),
-                .Year = model.Year
-            })
+            Dim employeeSalaryViewModels As IEnumerable(Of DisplayEmployeeSalaryViewModel) = MapToDisplayEmployeeSalary(employeeSalaries)
 
             Return View(NameOf(Index), employeeSalaryViewModels)
+        End Function
+
+        Private Shared Function MapToDisplayEmployeeSalary(employeeSalaries As IEnumerable(Of EmployeeSalaryModel)) As IEnumerable(Of DisplayEmployeeSalaryViewModel)
+            Return employeeSalaries.Select(Function(model) New DisplayEmployeeSalaryViewModel() With {
+                            .Id = model.Id,
+                            .EmployeeId = model.EmployeeId,
+                            .SalaryId = model.SalaryId,
+                            .Allowance = model.Allowance,
+                            .Net = model.Net,
+                            .NumberOfAbsent = model.NumberOfAbsent,
+                            .NumberOfLate = model.NumberOfLate,
+                            .Month = [Enum].Parse(GetType(MonthType), model.Month),
+                            .Year = model.Year
+                        })
         End Function
     End Class
 End Namespace
