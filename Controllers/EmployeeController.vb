@@ -118,17 +118,7 @@ Public Class EmployeeController
     <ValidateAntiForgeryToken>
     Async Function AddEmployeeSalary(employeeSalary As EmployeeSalaryViewModel) As Task(Of ActionResult)
         If ModelState.IsValid Then
-            Dim employeeSalaryModel = New EmployeeSalaryModel() With {
-                .Allowance = employeeSalary.Allowance,
-                .Deductions = employeeSalary.Deductions,
-                .EmployeeId = employeeSalary.EmployeeId,
-                .NumberOfAbsent = employeeSalary.NumberOfAbsent,
-                .NumberOfLate = employeeSalary.NumberOfLate,
-                .SalaryId = employeeSalary.SalaryId,
-                .Id = employeeSalary.Id,
-                .Month = [Enum].GetName(employeeSalary.Month.GetType(), employeeSalary.Month),
-                .Year = employeeSalary.Year
-            }
+            Dim employeeSalaryModel = _mapper.MapObjects(Of EmployeeSalaryModel, EmployeeSalaryViewModel)(New EmployeeSalaryModel(), employeeSalary)
             Dim salaryModel As SalaryModel = Await _employeeService.FindSalaryAsync(employeeSalaryModel.SalaryId)
             employeeSalaryModel.Net = salaryModel.BaseNet - Math.Abs(employeeSalaryModel.Allowance - employeeSalaryModel.Deductions)
             employeeSalaryModel.Net -= (employeeSalaryModel.NumberOfLate * 20 + employeeSalaryModel.NumberOfAbsent * 100)
@@ -137,8 +127,6 @@ Public Class EmployeeController
             Catch ex As SalaryException
                 Return RedirectToAction(NameOf(UpdateForm), New With {.employeeId = employeeSalary.EmployeeId, .errorMessage = ex.Message})
             End Try
-
-            Return RedirectToAction(NameOf(Index))
         End If
 
         Return RedirectToAction(NameOf(Index))

@@ -5,10 +5,13 @@ Imports EmployeeManagement.EmployeeSalaryViewModel
 Namespace Controllers
     Public Class EmployeeSalaryController
         Inherits Controller
-        Private ReadOnly _employeeSalaryService As IEmployeeSalaryService
 
-        Public Sub New(employeeSalaryService As IEmployeeSalaryService)
+        Private ReadOnly _employeeSalaryService As IEmployeeSalaryService
+        Private ReadOnly _autoMapper As IAutoMapper
+
+        Public Sub New(employeeSalaryService As IEmployeeSalaryService, autoMapper As IAutoMapper)
             _employeeSalaryService = employeeSalaryService
+            _autoMapper = autoMapper
         End Sub
 
         Async Function Index(employeeId? As Integer) As Task(Of ActionResult)
@@ -28,18 +31,9 @@ Namespace Controllers
             Return View(NameOf(Index), employeeSalaryViewModels)
         End Function
 
-        Private Shared Function MapToDisplayEmployeeSalary(employeeSalaries As IEnumerable(Of EmployeeSalaryModel)) As IEnumerable(Of DisplayEmployeeSalaryViewModel)
-            Return employeeSalaries.Select(Function(model) New DisplayEmployeeSalaryViewModel() With {
-                            .Id = model.Id,
-                            .EmployeeId = model.EmployeeId,
-                            .SalaryId = model.SalaryId,
-                            .Allowance = model.Allowance,
-                            .Net = model.Net,
-                            .NumberOfAbsent = model.NumberOfAbsent,
-                            .NumberOfLate = model.NumberOfLate,
-                            .Month = [Enum].Parse(GetType(MonthType), model.Month),
-                            .Year = model.Year
-                        })
+        Private Function MapToDisplayEmployeeSalary(employeeSalaries As IEnumerable(Of EmployeeSalaryModel)) As IEnumerable(Of DisplayEmployeeSalaryViewModel)
+            Return employeeSalaries.Select(Function(model) _autoMapper.MapObjects(Of DisplayEmployeeSalaryViewModel, EmployeeSalaryModel)(New DisplayEmployeeSalaryViewModel(), model))
         End Function
+
     End Class
 End Namespace
