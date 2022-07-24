@@ -9,9 +9,6 @@ Public Class DisplayEmployeeSalaryViewModel
     Public Property SalaryId As Integer
     Public Property Allowance As Decimal
 
-    <DisplayName("Base Salary")>
-    Public Property BaseSalary As Decimal
-
     <DisplayName("Net Salary")>
     Public Property Net As Decimal
 

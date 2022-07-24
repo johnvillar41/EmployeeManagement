@@ -14,9 +14,16 @@ Namespace Controllers
             _autoMapper = autoMapper
         End Sub
 
-        Async Function Index(employeeId? As Integer) As Task(Of ActionResult)
+        Async Function Index(employeeId? As Integer, year? As Integer) As Task(Of ActionResult)
             If employeeId Is Nothing Then
                 Return RedirectToAction("../Employee/Index")
+            End If
+
+            If year IsNot Nothing Then
+                Dim _employeeSalaries = Await _employeeSalaryService.FetchAllSalaryGivenAYearAsync(year, employeeId)
+                Dim _employeeSalaryViewModels As IEnumerable(Of DisplayEmployeeSalaryViewModel) = MapToDisplayEmployeeSalary(_employeeSalaries)
+
+                Return View(_employeeSalaryViewModels)
             End If
 
             Dim employeeSalaries = Await _employeeSalaryService.FetchAllEmployeeSalaryAsync(employeeId)
@@ -24,11 +31,8 @@ Namespace Controllers
             Return View(employeeSalaryViewModels)
         End Function
 
-        Async Function Sort(year As Integer, employeeId As Integer) As Task(Of ActionResult)
-            Dim employeeSalaries = Await _employeeSalaryService.FetchAllSalaryGivenAYearAsync(year, employeeId)
-            Dim employeeSalaryViewModels As IEnumerable(Of DisplayEmployeeSalaryViewModel) = MapToDisplayEmployeeSalary(employeeSalaries)
-
-            Return View(NameOf(Index), employeeSalaryViewModels)
+        Function Sort(year As Integer, employeeId As Integer) As ActionResult
+            Return RedirectToAction(NameOf(Index), New With {.employeeId = employeeId, .year = year})
         End Function
 
         Private Function MapToDisplayEmployeeSalary(employeeSalaries As IEnumerable(Of EmployeeSalaryModel)) As IEnumerable(Of DisplayEmployeeSalaryViewModel)
