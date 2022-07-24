@@ -187,6 +187,7 @@
     <Compile Include="Controllers\EmployeeSalaryController.vb" />
     <Compile Include="Controllers\SalaryController.vb" />
     <Compile Include="Controllers\WorkController.vb" />
+    <Compile Include="Exceptions\AutoMapperException.vb" />
     <Compile Include="Exceptions\SalaryException.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>

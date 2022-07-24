@@ -9,9 +9,12 @@ Public Class AutoMapper
 
         For Each source In sourceProperties
             For Each destination In destinationProperties
-                If source.Name.Equals(destination.Name) Then
+                If source.Name.Equals(destination.Name) And source.PropertyType().Equals(destination.PropertyType()) Then
                     destination.SetValue(destinationObject, source.GetValue(sourceObject))
                     Exit For
+                Else
+                    Throw New AutoMapperException($"Property source:{source.Name} and destination:{destination.Name} 
+                            are not equal for classes of{destinationObject.GetType().Name} and {sourceObject.GetType().Name}")
                 End If
             Next
         Next

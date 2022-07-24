@@ -108,16 +108,9 @@ Public Class EmployeeController
         If salary Is Nothing Then
             salary = New SalaryModel()
         End If
-        Dim employeeDetailViewModel As EmployeeDetailViewModel = New EmployeeDetailViewModel() With {
-            .Id = employeeDetail.Id,
-            .Name = employeeDetail.Name,
-            .Age = employeeDetail.Age,
-            .Salary = salary.BaseNet,
-            .Address = employeeDetail.Address,
-            .BirthDate = employeeDetail.BirthDate,
-            .IsActive = employeeDetail.IsActive,
-            .NumberOfWork = employeeNumberWork
-        }
+
+        Dim employeeDetailViewModel As EmployeeDetailViewModel = _mapper.MapObjects(Of EmployeeDetailViewModel, EmployeeModel)(New EmployeeDetailViewModel(), employeeDetail)
+        employeeDetailViewModel.Salary = salary.BaseNet
         Return View(NameOf(Detail), employeeDetailViewModel)
     End Function
 
