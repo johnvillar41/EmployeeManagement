@@ -40,14 +40,12 @@
                         <thead>
                             <tr>
                                 <td>@Html.LabelFor(Function(model) model.IsActive, New With {.class = "text-dark font-weight-bold"})</td>
-                                <td>@Html.LabelFor(Function(model) model.Salary, New With {.class = "text-dark font-weight-bold"})</td>
                                 <td>@Html.LabelFor(Function(model) model.NumberOfWork, New With {.class = "text-dark font-weight-bold"})</td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>@Html.DisplayFor(Function(model) model.IsActive)</td>
-                                <td>@Html.DisplayFor(Function(model) model.Salary)</td>
                                 <td>@Html.DisplayFor(Function(model) model.NumberOfWork)</td>                                
                             </tr>
                         </tbody>

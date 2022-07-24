@@ -28,7 +28,7 @@ Public Class EmployeeSalaryViewModel
     Public Property SalaryTypes As IEnumerable(Of SalaryViewModel)
 
     <DisplayName("Base Salary")>
-    Public Property BaseSalary As Decimal
+    Public Property BaseNet As Decimal
 
     <DisplayName("Net Salary")>
     Public Property Net As Decimal

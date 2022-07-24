@@ -101,8 +101,6 @@
                     <h5>Net Worth Details</h5>
                     <div class="card">
                         <div class="card-body">
-                            @Html.LabelFor(Function(model) model.BaseSalary, New With {.class = "fw-bold text-warning font-weight-bold"}) : @Html.DisplayFor(Function(model) model.BaseSalary)
-                            <br />
                             @Html.LabelFor(Function(model) model.Net, New With {.class = "fw-bold text-warning font-weight-bold"}) : @Html.DisplayFor(Function(model) model.Net)
                         </div>
                     </div>

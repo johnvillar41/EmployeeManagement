@@ -71,25 +71,11 @@ Public Class EmployeeController
             salaryTypes = New List(Of SalaryModel)
         End If
 
-        Dim employeeSalaryViewModel As EmployeeSalaryViewModel = New EmployeeSalaryViewModel() With {
-            .Allowance = employeeSalary.Allowance,
-            .Deductions = employeeSalary.Deductions,
-            .EmployeeId = employeeSalary.EmployeeId,
-            .Id = employeeSalary.Id,
-            .BaseSalary = salary.BaseNet,
-            .Net = employeeSalary.Net,
-            .NumberOfAbsent = employeeSalary.NumberOfAbsent,
-            .NumberOfLate = employeeSalary.NumberOfLate,
-            .SalaryTypes = salaryTypes.Select(Function(model) New SalaryViewModel() With {
-                .Id = model.Id,
-                .BaseNet = model.BaseNet,
-                .DateCreated = model.DateCreated,
-                .Name = model.Name
-            }),
-            .SalaryName = salary.Name,
-            .Month = [Enum].Parse(GetType(MonthType), employeeSalary.Month),
-            .Year = employeeSalary.Year
-        }
+        Dim employeeSalaryViewModel As EmployeeSalaryViewModel = _mapper.MapObjects(Of EmployeeSalaryViewModel, EmployeeSalaryModel)(New EmployeeSalaryViewModel(), employeeSalary)
+        employeeSalaryViewModel.BaseNet = salary.BaseNet
+        employeeSalaryViewModel.SalaryName = salary.Name
+        employeeSalaryViewModel.SalaryTypes = salaryTypes.Select(Function(model) _mapper.MapObjects(Of SalaryViewModel, SalaryModel)(New SalaryViewModel(), model))
+
         Dim employeeUpdateViewModel As EmployeeUpdateViewModel = New EmployeeUpdateViewModel() With {
             .EmployeeViewModel = employeeViewModel,
             .EmployeeSalaryViewModel = employeeSalaryViewModel
@@ -104,13 +90,8 @@ Public Class EmployeeController
     Async Function Detail(employeeId As Integer) As Task(Of ActionResult)
         Dim employeeDetail As EmployeeModel = Await _employeeService.FindEmployeeAsync(employeeId)
         Dim employeeNumberWork As Integer = Await _employeeService.FetchNumberOfWorksAsync(employeeId)
-        Dim salary As SalaryModel = Await _employeeService.FindSalaryAsync(employeeDetail.SalaryId)
-        If salary Is Nothing Then
-            salary = New SalaryModel()
-        End If
-
         Dim employeeDetailViewModel As EmployeeDetailViewModel = _mapper.MapObjects(Of EmployeeDetailViewModel, EmployeeModel)(New EmployeeDetailViewModel(), employeeDetail)
-        employeeDetailViewModel.Salary = salary.BaseNet
+        employeeDetailViewModel.NumberOfWork = employeeNumberWork
         Return View(NameOf(Detail), employeeDetailViewModel)
     End Function
 
@@ -129,6 +110,6 @@ Public Class EmployeeController
             End Try
         End If
 
-        Return RedirectToAction(NameOf(Index))
+        Return RedirectToAction(NameOf(UpdateForm), New With {.employeeId = employeeSalary.EmployeeId})
     End Function
 End Class

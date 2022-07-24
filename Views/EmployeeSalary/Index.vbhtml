@@ -20,7 +20,7 @@
         <div class="col-12">
             <div Class="row">
                 @For Each item In Model
-                    @<div class="col-4">
+                    @<div class="col-4 p-1">
                         <div Class="card rounded shadow-sm">
                             <div Class="card-body">
                                 <h5 Class="card-title">@item.Month, @item.Year</h5>
