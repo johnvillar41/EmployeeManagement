@@ -9,7 +9,7 @@ Public Class AutoMapper
 
         For Each source In sourceProperties
             For Each destination In destinationProperties
-                If source.Name.Equals(destination.Name) And source.PropertyType().Equals(destination.PropertyType()) Then
+                If source.Name.Equals(destination.Name) And source.PropertyType.Equals(destination.PropertyType) Then
                     destination.SetValue(destinationObject, source.GetValue(sourceObject))
                     Exit For
                 End If
