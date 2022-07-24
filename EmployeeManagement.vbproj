@@ -191,6 +191,7 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mapper\AutoMapper.vb" />
     <Compile Include="Models\EmployeeModel.vb" />
     <Compile Include="Models\EmployeeSalaryModel.vb" />
     <Compile Include="Models\SalaryModel.vb" />

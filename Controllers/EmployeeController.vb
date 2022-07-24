@@ -12,14 +12,16 @@ Public Class EmployeeController
 
     Async Function Index() As Task(Of ActionResult)
         Dim employees = Await _employeeService.ViewAllEmployeesAsync()
-        Dim employeeViewModels = employees.Select(Of EmployeeViewModel)(Function(model) New EmployeeViewModel() With {
-            .Id = model.Id,
-            .Name = model.Name,
-            .Age = model.Age,
-            .Address = model.Address,
-            .BirthDate = model.BirthDate,
-            .IsActive = model.IsActive
-        })
+        Dim employeeViewModels = employees.Select(Of EmployeeViewModel)(Function(model) New AutoMapper(Of EmployeeViewModel, EmployeeModel)(New EmployeeViewModel(), model).MapObjects())
+
+        'Dim employeeViewModels = employees.Select(Of EmployeeViewModel)(Function(model) New EmployeeViewModel() With {
+        '.Id = model.Id,
+        '    .Name = model.Name,
+        '    .Age = model.Age,
+        '    .Address = model.Address,
+        '    .BirthDate = model.BirthDate,
+        '    .IsActive = model.IsActive
+        '})
         Return View(employeeViewModels)
     End Function
 
