@@ -5,23 +5,16 @@ Public Class EmployeeController
     Inherits System.Web.Mvc.Controller
 
     Private ReadOnly _employeeService As IEmployeeService
-    Public Sub New(employeeservice As IEmployeeService)
+    Private ReadOnly _mapper As IAutoMapper
+    Public Sub New(employeeservice As IEmployeeService, mapper As IAutoMapper)
         _employeeService = employeeservice
-
+        _mapper = mapper
     End Sub
 
     Async Function Index() As Task(Of ActionResult)
         Dim employees = Await _employeeService.ViewAllEmployeesAsync()
-        Dim employeeViewModels = employees.Select(Of EmployeeViewModel)(Function(model) New AutoMapper(Of EmployeeViewModel, EmployeeModel)(New EmployeeViewModel(), model).MapObjects())
+        Dim employeeViewModels = employees.Select(Function(model) _mapper.MapObjects(Of EmployeeViewModel, EmployeeModel)(New EmployeeViewModel(), model))
 
-        'Dim employeeViewModels = employees.Select(Of EmployeeViewModel)(Function(model) New EmployeeViewModel() With {
-        '.Id = model.Id,
-        '    .Name = model.Name,
-        '    .Age = model.Age,
-        '    .Address = model.Address,
-        '    .BirthDate = model.BirthDate,
-        '    .IsActive = model.IsActive
-        '})
         Return View(employeeViewModels)
     End Function
 

@@ -1,26 +1,21 @@
 ﻿Imports System.Reflection
 
-Public Class AutoMapper(Of TDestination, TSource)
-    Private ReadOnly _destinationObject As TDestination
-    Private ReadOnly _sourceObject As TSource
-    Public Sub New(destination As TDestination, source As TSource)
-        _destinationObject = destination
-        _sourceObject = source
-    End Sub
+Public Class AutoMapper
+    Implements IAutoMapper
 
-    Public Function MapObjects() As TDestination
-        Dim destinationProperties = _destinationObject.GetType().GetProperties()
-        Dim sourceProperties = _sourceObject.GetType().GetProperties()
+    Public Function MapObjects(Of TDestination, TSource)(destinationObject As TDestination, sourceObject As TSource) As TDestination Implements IAutoMapper.MapObjects
+        Dim destinationProperties = destinationObject.GetType().GetProperties()
+        Dim sourceProperties = sourceObject.GetType().GetProperties()
 
         For Each source In sourceProperties
             For Each destination In destinationProperties
                 If source.Name.Equals(destination.Name) Then
-                    destination.SetValue(_destinationObject, source.GetValue(_sourceObject))
+                    destination.SetValue(destinationObject, source.GetValue(sourceObject))
                     Exit For
                 End If
             Next
         Next
 
-        Return _destinationObject
+        Return destinationObject
     End Function
 End Class
