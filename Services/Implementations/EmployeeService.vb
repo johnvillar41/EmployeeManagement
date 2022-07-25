@@ -49,7 +49,7 @@ Public Class EmployeeService
     End Function
 
     Public Async Function FindSalaryAsync(salaryId As Integer) As Task(Of SalaryModel) Implements IEmployeeService.FindSalaryAsync
-        Dim salary = Await _salaryRepo.SelectQueryAsync(Of SalaryModel)("SELECT * FROM SalaryTable WHERE Id = @Id", New With {.Id = salaryId})
+        Dim salary = Await _salaryRepo.SelectQueryAsync(Of SalaryModel)("SELECT * FROM SalaryTable WHERE Id = @Id ORDER BY Id DESC", New With {.Id = salaryId})
         Return salary.FirstOrDefault()
     End Function
 

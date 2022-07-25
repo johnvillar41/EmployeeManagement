@@ -26,7 +26,7 @@
             </div>
         </div>
     </nav>
-    <div class="container body-content">
+    <div class="body-content">
         @RenderBody()
     </div>
 
