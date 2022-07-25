@@ -21,13 +21,13 @@ Namespace Controllers
 
             If year IsNot Nothing Then
                 Dim _employeeSalaries = Await _employeeSalaryService.FetchAllSalaryGivenAYearAsync(year, employeeId)
-                Dim _employeeSalaryViewModels As IEnumerable(Of DisplayEmployeeSalaryViewModel) = MapToDisplayEmployeeSalary(_employeeSalaries)
+                Dim _employeeSalaryViewModels As IEnumerable(Of DisplayEmployeeSalaryViewModel) = MapToDisplayEmployeeSalary(_employeeSalaries).OrderBy(Function(m) m.Year)
 
                 Return View(_employeeSalaryViewModels)
             End If
 
             Dim employeeSalaries = Await _employeeSalaryService.FetchAllEmployeeSalaryAsync(employeeId)
-            Dim employeeSalaryViewModels As IEnumerable(Of DisplayEmployeeSalaryViewModel) = MapToDisplayEmployeeSalary(employeeSalaries)
+            Dim employeeSalaryViewModels As IEnumerable(Of DisplayEmployeeSalaryViewModel) = MapToDisplayEmployeeSalary(employeeSalaries).OrderBy(Function(m) m.Year)
             Return View(employeeSalaryViewModels)
         End Function
 
@@ -35,8 +35,8 @@ Namespace Controllers
             Return RedirectToAction(NameOf(Index), New With {.employeeId = employeeId, .year = year})
         End Function
 
-        Private Function MapToDisplayEmployeeSalary(employeeSalaries As IEnumerable(Of EmployeeSalaryModel)) As IEnumerable(Of DisplayEmployeeSalaryViewModel)
-            Return employeeSalaries.Select(Function(model) _autoMapper.MapObjects(Of DisplayEmployeeSalaryViewModel, EmployeeSalaryModel)(New DisplayEmployeeSalaryViewModel(), model))
+        Private Function MapToDisplayEmployeeSalary(employeeSalaries As IEnumerable(Of EmployeeSalaryModel)) As List(Of DisplayEmployeeSalaryViewModel)
+            Return employeeSalaries.Select(Function(model) _autoMapper.MapObjects(Of DisplayEmployeeSalaryViewModel, EmployeeSalaryModel)(New DisplayEmployeeSalaryViewModel(), model)).ToList()
         End Function
 
     End Class
