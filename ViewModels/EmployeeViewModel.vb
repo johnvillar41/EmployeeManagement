@@ -17,4 +17,9 @@ Public Class EmployeeViewModel
 
     <Required(ErrorMessage:="Status is Required")>
     Public Property IsActive As Integer
+
+    <Required(ErrorMessage:="Salary Type is Required")>
+    Public Property SalaryId As Integer
+
+    Public Property SalaryTypes As IEnumerable(Of SalaryViewModel)
 End Class

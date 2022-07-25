@@ -78,8 +78,10 @@ Public Class EmployeeController
 
         Dim employeeUpdateViewModel As EmployeeUpdateViewModel = New EmployeeUpdateViewModel() With {
             .EmployeeViewModel = employeeViewModel,
-            .EmployeeSalaryViewModel = employeeSalaryViewModel
+            .EmployeeSalaryViewModel = employeeSalaryViewModel,
+            .SalaryViewModel = _mapper.MapObjects(Of SalaryViewModel, SalaryModel)(New SalaryViewModel(), salary)
         }
+        employeeUpdateViewModel.EmployeeViewModel.SalaryTypes = employeeSalaryViewModel.SalaryTypes
         Return View(NameOf(UpdateForm), employeeUpdateViewModel)
     End Function
 

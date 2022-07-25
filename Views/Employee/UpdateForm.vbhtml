@@ -11,7 +11,7 @@ End Code
             @Html.Partial("_EmployeeSalaryPartial", Model.EmployeeSalaryViewModel)
         </div>
         <div class="col">
-            @Html.Partial("_EmployeeSalaryPartial", Model.EmployeeSalaryViewModel)
+            @Html.Partial("_SalaryPartial", Model.SalaryViewModel)
         </div>
     </div>
 </div>

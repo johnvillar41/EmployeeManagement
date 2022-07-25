@@ -51,6 +51,13 @@
                         </div>
 
                         <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.DropDownList(NameOf(Model.SalaryTypes), Model.SalaryTypes.Select(Function(model) New SelectListItem With {.Text = model.Name, .Value = model.Id}), New With {.class = "form-control"})
+                                @Html.ValidationMessageFor(Function(model) model.SalaryTypes, "", New With {.class = "text-danger"})
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-md-offset-2 col-md-12">
                                 <input type="submit" value="Create" class="btn btn-secondary btn-block" />
                             </div>
