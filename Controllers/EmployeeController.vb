@@ -72,6 +72,7 @@ Public Class EmployeeController
         End If
 
         Dim employeeSalaryViewModel As EmployeeSalaryViewModel = _mapper.MapObjects(Of EmployeeSalaryViewModel, EmployeeSalaryModel)(New EmployeeSalaryViewModel(), employeeSalary)
+        employeeSalaryViewModel.SalaryId = salary.Id
         employeeSalaryViewModel.BaseNet = salary.BaseNet
         employeeSalaryViewModel.SalaryName = salary.Name
         employeeSalaryViewModel.SalaryTypes = salaryTypes.Select(Function(model) _mapper.MapObjects(Of SalaryViewModel, SalaryModel)(New SalaryViewModel(), model))

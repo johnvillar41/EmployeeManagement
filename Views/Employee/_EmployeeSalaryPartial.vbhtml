@@ -13,7 +13,7 @@
 
             @Using (Html.BeginForm("AddEmployeeSalary", "Employee", FormMethod.Post))
                 @Html.AntiForgeryToken()
-
+                @Html.HiddenFor(Function(model) model.SalaryId)
                 @<div class="form-horizontal">
                     @Html.ValidationSummary(True, "", New With {.class = "text-danger"})
                     @Html.HiddenFor(Function(model) model.Id)
@@ -71,21 +71,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <div class="col-md-12 my-auto">
-                                @Html.DisplayFor(Function(model) model.SalaryName)
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                @Html.DropDownList(NameOf(Model.SalaryId), Model.SalaryTypes.Select(Function(model) New SelectListItem With {.Text = model.Name, .Value = model.Id}), New With {.class = "form-control"})
-                                @Html.ValidationMessageFor(Function(model) model.SalaryTypes, "", New With {.class = "text-danger"})
-                            </div>
-                        </div>
-                    </div>
+l
                     <div class="form-group mt-4">
                         <div class="col-md-offset-2 col-md-12">
                             <input type="submit" value="Create Salary" class="btn btn-secondary btn-block" />
