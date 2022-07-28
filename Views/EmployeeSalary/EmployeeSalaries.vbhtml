@@ -1,0 +1,1 @@
+﻿@ModelType IEnumerable(Of EmployeeSalaryViewModel)

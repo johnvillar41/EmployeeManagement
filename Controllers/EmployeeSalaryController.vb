@@ -31,6 +31,11 @@ Namespace Controllers
             Return View(employeeSalaryViewModels)
         End Function
 
+        Async Function EmployeeSalaries() As Task(Of ActionResult)
+            Dim employees As IEnumerable(Of EmployeeModel) = Await _employeeSalaryService.FetchAllEmployees()
+            Throw New NotImplementedException("Mamaya gagawin")
+        End Function
+
         Function Sort(year As Integer, employeeId As Integer) As ActionResult
             Return RedirectToAction(NameOf(Index), New With {.employeeId = employeeId, .year = year})
         End Function

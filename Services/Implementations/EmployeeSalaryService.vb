@@ -11,4 +11,9 @@ Public Class EmployeeSalaryService
     Public Async Function FetchAllSalaryGivenAYearAsync(year As Integer, employeeId As Integer) As Task(Of IEnumerable(Of EmployeeSalaryModel)) Implements IEmployeeSalaryService.FetchAllSalaryGivenAYearAsync
         Return Await SelectQueryAsync(Of EmployeeSalaryModel)($"SELECT * FROM {GetTableName} WHERE Year = @Year AND EmployeeId = @EmployeeId", New With {.Year = year, .EmployeeId = employeeId})
     End Function
+
+    Public Function FetchAllEmployees() As Task(Of IEnumerable(Of EmployeeModel)) Implements IEmployeeSalaryService.FetchAllEmployees
+        Throw New NotImplementedException()
+    End Function
+
 End Class

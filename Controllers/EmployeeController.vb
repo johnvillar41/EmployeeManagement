@@ -59,10 +59,13 @@ Public Class EmployeeController
         Dim salaryTypes = Await _employeeService.FetchSalaryTypes()
         employeeViewModel.SalaryTypes = salaryTypes.Select(Function(model) _mapper.MapObjects(Of SalaryViewModel, SalaryModel)(New SalaryViewModel, model))
 
-        Dim employeeSalary As EmployeeSalaryModel = Await _employeeService.FindEmployeeSalaryAsync(employeeId)
-        If employeeSalary Is Nothing Then
-            employeeSalary = New EmployeeSalaryModel()
-        End If
+        Dim employeeSalary As EmployeeSalaryModel = Nothing
+        Try
+            employeeSalary = Await _employeeService.FindEmployeeSalaryAsync(employeeId)
+        Catch ex As SalaryException
+            My.Application.Log.WriteEntry(ex.Message)
+            employeeSalary = New EmployeeSalaryModel
+        End Try
 
         Dim salary As SalaryModel = Await _employeeService.FindSalaryAsync(employeeSalary.SalaryId)
         If salary Is Nothing Then

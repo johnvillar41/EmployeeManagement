@@ -22,6 +22,9 @@
                     <li class="nav-item">
                         @Html.ActionLink("Salary", "Index", "Salary", Nothing, New With {.class = "nav-link"})
                     </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("EmployeeSalary", "EmployeeSalaries", "EmployeeSalary", Nothing, New With {.class = "nav-link"})
+                    </li>
                 </ul>
             </div>
         </div>

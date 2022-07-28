@@ -53,6 +53,10 @@ Public Class EmployeeService
                     FROM EmployeeSalaryTable WHERE EmployeeId = @EmployeeId AND Year = @Year GROUP BY EmployeeId, Year               
                         ", New With {employeeId, year})
 
+        If salary.Count = 0 Then
+            Throw New SalaryException($"Salary for employee:{employeeId} does not exist yet!")
+        End If
+
         Dim employee = Await _employeeRepo.FindByIdAsync(salary.FirstOrDefault().EmployeeId)
         salary.FirstOrDefault().SalaryId = employee.SalaryId
         Return salary.FirstOrDefault()

@@ -226,14 +226,14 @@
     <Compile Include="Services\Interfaces\ISalaryService.vb" />
     <Compile Include="Services\Interfaces\IWorkService.vb" />
     <Compile Include="UnityBootstrapper.vb" />
-    <Compile Include="ViewModels\DisplayEmployeeSalaryViewModel.vb" />
-    <Compile Include="ViewModels\DisplayWorkViewModel.vb" />
-    <Compile Include="ViewModels\EmployeeDetailViewModel.vb" />
-    <Compile Include="ViewModels\EmployeeSalaryViewModel.vb" />
-    <Compile Include="ViewModels\EmployeeUpdateViewModel.vb" />
-    <Compile Include="ViewModels\EmployeeViewModel.vb" />
-    <Compile Include="ViewModels\SalaryViewModel.vb" />
-    <Compile Include="ViewModels\WorkViewModel.vb" />
+    <Compile Include="ViewModels\EmployeeSalary\DisplayEmployeeSalaryViewModel.vb" />
+    <Compile Include="ViewModels\Work\DisplayWorkViewModel.vb" />
+    <Compile Include="ViewModels\Employee\EmployeeDetailViewModel.vb" />
+    <Compile Include="ViewModels\EmployeeSalary\EmployeeSalaryViewModel.vb" />
+    <Compile Include="ViewModels\Employee\EmployeeUpdateViewModel.vb" />
+    <Compile Include="ViewModels\Employee\EmployeeViewModel.vb" />
+    <Compile Include="ViewModels\Salary\SalaryViewModel.vb" />
+    <Compile Include="ViewModels\Work\WorkViewModel.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -383,6 +383,7 @@
     <Content Include="Views\Salary\UpdateForm.vbhtml" />
     <Content Include="Views\EmployeeSalary\Index.vbhtml" />
     <Content Include="Views\Employee\_SalaryPartial.vbhtml" />
+    <Content Include="Views\EmployeeSalary\EmployeeSalaries.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
