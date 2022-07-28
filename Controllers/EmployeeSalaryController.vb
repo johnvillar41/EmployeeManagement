@@ -33,7 +33,9 @@ Namespace Controllers
 
         Async Function EmployeeSalaries() As Task(Of ActionResult)
             Dim employees As IEnumerable(Of EmployeeModel) = Await _employeeSalaryService.FetchAllEmployees()
-            Throw New NotImplementedException("Mamaya gagawin")
+            Dim employeeViewModels As IEnumerable(Of EmployeeViewModel) =
+                employees.Select(Function(model) _autoMapper.MapObjects(Of EmployeeViewModel, EmployeeModel)(New EmployeeViewModel, model))
+            Return View(employeeViewModels)
         End Function
 
         Function Sort(year As Integer, employeeId As Integer) As ActionResult
