@@ -19,6 +19,7 @@
                                     <a href="#" Class="card-link">@Html.ActionLink("Update", "UpdateForm", New With {.employeeId = item.Id}, New With {.class = "text-warning card-link"})</a>
                                     <a href="#" Class="card-link">@Html.ActionLink("Details", "Detail", New With {.employeeId = item.Id}, New With {.class = "text-warning card-link"})</a>
                                     <a href="#" Class="card-link">@Html.ActionLink("Work Loads", "Index", "Work", New With {.employeeId = item.Id}, New With {.class = "text-warning card-link"})</a>
+                                    <a href="#" Class="card-link">@Html.ActionLink("Salaries", "Index", "EmployeeSalary", New With {.employeeId = item.Id}, New With {.class = "text-warning card-link"})</a>
                                     <a href="#" Class="card-link">@Html.ActionLink("Delete", "Delete", New With {.employeeId = item.Id}, New With {.class = "text-danger card-link"})</a>
                                 </div>
                             </div>

@@ -71,8 +71,6 @@ Public Class EmployeeController
 
         Dim employeeSalaryViewModel As EmployeeSalaryViewModel = _mapper.MapObjects(Of EmployeeSalaryViewModel, EmployeeSalaryModel)(New EmployeeSalaryViewModel(), employeeSalary)
         employeeSalaryViewModel.SalaryId = salary.Id
-        employeeSalaryViewModel.BaseNet = salary.BaseNet
-        employeeSalaryViewModel.SalaryName = salary.Name
 
         Dim employeeUpdateViewModel As EmployeeUpdateViewModel = New EmployeeUpdateViewModel() With {
             .EmployeeViewModel = employeeViewModel,
