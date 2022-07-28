@@ -6,28 +6,32 @@
     <span class="badge badge-pill badge-success"> </span> - Salary implemented
     <div class="row mt-4">
         @For Each item In Model
-            @<div Class="col-md-3">
-                @If item.SalaryId = 0 Then
-                    @<div Class="card shadow bg-danger">
-                        <div class="p-2">
-                            @item.ToString()
+            @<div Class="col-md-4 col-lg-3 p-4 align-items-stretch">
+                <div class="card shadow-sm ">
+                    @If item.SalaryId = 0 Then
+                        @<div Class="p-2">
+                            <h4 class="text-truncate">@item.Name</h4>
+                            <h6 class="text-dark">@item.Id</h6>
+                            <p class="badge-pill badge-danger badge text-truncate">No Salary Implemented!</p>
                         </div>
-                        <div class="card-footer bg-light">
-                            @Html.ActionLink("Implement Salary", "CreateForm", New With {.employeeId = item.Id}, New With {.class = "btn btn-secondary btn-block btn-success"})
+                    Else
+                        @<div Class="p-2">
+                            <h4 class="text-truncate">@item.Name</h4>
+                            <h6 class="text-dark">@item.Id</h6>
+                            <p class="badge-pill badge-success badge text-truncate">Salary Implemented!</p>
                         </div>
+                    End If
+                <div class="p-2">
+                    @If item.SalaryId = 0 Then
+                        @Html.ActionLink("Create Salary", "CreateForm", New With {.employeeId = item.Id}, New With {.class = "btn btn-secondary btn-block"})
+                    Else
+                        @Html.ActionLink("View Salaries", "Index", New With {.employeeId = item.Id}, New With {.class = "btn btn-secondary btn-block"})
+                        @Html.ActionLink("Update Salary", "Index", New With {.employeeId = item.Id}, New With {.class = "btn btn-secondary btn-block"})
+                    End If
 
-                    </div>
-                Else
-                    @<div Class="card shadow bg-success">
-                        <div class="p-2">
-                            @item.ToString()
-                        </div>
 
-                        <div class="card-footer bg-light">
-                            @Html.ActionLink("View Salaries", "Index", New With {.employeeId = item.Id}, New With {.class = "btn btn-secondary btn-block"})
-                        </div>
-                    </div>
-                End If
+                </div>
+                </div>
 
             </div>
         Next

@@ -42,6 +42,10 @@ Namespace Controllers
             Return RedirectToAction(NameOf(Index), New With {.employeeId = employeeId, .year = year})
         End Function
 
+        Function CreateForm(employeeId As Integer) As ActionResult
+            Return View()
+        End Function
+
         Private Function MapToDisplayEmployeeSalary(employeeSalaries As IEnumerable(Of EmployeeSalaryModel)) As List(Of DisplayEmployeeSalaryViewModel)
             Return employeeSalaries.Select(Function(model) _autoMapper.MapObjects(Of DisplayEmployeeSalaryViewModel, EmployeeSalaryModel)(New DisplayEmployeeSalaryViewModel(), model)).ToList()
         End Function

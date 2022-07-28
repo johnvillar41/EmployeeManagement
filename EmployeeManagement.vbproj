@@ -384,6 +384,7 @@
     <Content Include="Views\EmployeeSalary\Index.vbhtml" />
     <Content Include="Views\Employee\_SalaryPartial.vbhtml" />
     <Content Include="Views\EmployeeSalary\EmployeeSalaries.vbhtml" />
+    <Content Include="Views\EmployeeSalary\CreateForm.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
