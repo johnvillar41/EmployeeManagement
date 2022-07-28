@@ -39,22 +39,6 @@
                             @Html.DisplayFor(Function(model) model.Deductions)
                         </th>
                     </tr>
-                    <tr>
-                        <th>
-                            @Html.LabelFor(Function(model) model.SalaryName)
-                        </th>
-                        <th>
-                            @Html.DisplayFor(Function(model) model.SalaryName)
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            @Html.LabelFor(Function(model) model.BaseNet)
-                        </th>
-                        <th>
-                            @Html.DisplayFor(Function(model) model.BaseNet)
-                        </th>
-                    </tr>
                 </tbody>
             </table>
             @Html.ActionLink("View Employee Salary Detail List", "Index", "EmployeeSalary", New With {.EmployeeId = Model.EmployeeId}, New With {.class = "btn btn-block btn-secondary"})

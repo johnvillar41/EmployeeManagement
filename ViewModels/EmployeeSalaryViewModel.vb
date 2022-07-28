@@ -28,8 +28,4 @@ Public Class EmployeeSalaryViewModel
     Public Property Allowance As Decimal
     Public Property Deductions As Decimal
     Public Property SalaryId As Integer
-    Public Property SalaryName As String
-
-    <DisplayName("Base Salary")>
-    Public Property BaseNet As Decimal
 End Class
