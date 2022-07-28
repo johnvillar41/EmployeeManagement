@@ -57,6 +57,7 @@
                     </tr>
                 </tbody>
             </table>
+            @Html.ActionLink("View Employee Salary Detail List", "Index", "EmployeeSalary", New With {.EmployeeId = Model.EmployeeId}, New With {.class = "btn btn-block btn-secondary"})
         </div>
     </div>
 </div>
