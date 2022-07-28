@@ -56,6 +56,9 @@ Public Class EmployeeController
 
         Dim employeeDetail As EmployeeModel = Await _employeeService.FindEmployeeAsync(employeeId)
         Dim employeeViewModel As EmployeeViewModel = _mapper.MapObjects(Of EmployeeViewModel, EmployeeModel)(New EmployeeViewModel(), employeeDetail)
+        Dim salaryTypes = Await _employeeService.FetchSalaryTypes()
+        employeeViewModel.SalaryTypes = salaryTypes.Select(Function(model) _mapper.MapObjects(Of SalaryViewModel, SalaryModel)(New SalaryViewModel, model))
+
         Dim employeeSalary As EmployeeSalaryModel = Await _employeeService.FindEmployeeSalaryAsync(employeeId)
         If employeeSalary Is Nothing Then
             employeeSalary = New EmployeeSalaryModel()
@@ -66,23 +69,16 @@ Public Class EmployeeController
             salary = New SalaryModel()
         End If
 
-        Dim salaryTypes As IEnumerable(Of SalaryModel) = Await _employeeService.FetchSalaryTypes()
-        If salaryTypes Is Nothing Then
-            salaryTypes = New List(Of SalaryModel)
-        End If
-
         Dim employeeSalaryViewModel As EmployeeSalaryViewModel = _mapper.MapObjects(Of EmployeeSalaryViewModel, EmployeeSalaryModel)(New EmployeeSalaryViewModel(), employeeSalary)
         employeeSalaryViewModel.SalaryId = salary.Id
         employeeSalaryViewModel.BaseNet = salary.BaseNet
         employeeSalaryViewModel.SalaryName = salary.Name
-        employeeSalaryViewModel.SalaryTypes = salaryTypes.Select(Function(model) _mapper.MapObjects(Of SalaryViewModel, SalaryModel)(New SalaryViewModel(), model))
 
         Dim employeeUpdateViewModel As EmployeeUpdateViewModel = New EmployeeUpdateViewModel() With {
             .EmployeeViewModel = employeeViewModel,
             .EmployeeSalaryViewModel = employeeSalaryViewModel,
             .SalaryViewModel = _mapper.MapObjects(Of SalaryViewModel, SalaryModel)(New SalaryViewModel(), salary)
         }
-        employeeUpdateViewModel.EmployeeViewModel.SalaryTypes = employeeSalaryViewModel.SalaryTypes
         Return View(NameOf(UpdateForm), employeeUpdateViewModel)
     End Function
 

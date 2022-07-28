@@ -9,13 +9,16 @@ Public Class EmployeeService
     Private ReadOnly _workRepo As IRepository(Of WorkModel)
     Private ReadOnly _salaryRepo As IRepository(Of SalaryModel)
     Private ReadOnly _employeeSalaryRepo As IRepository(Of EmployeeSalaryModel)
+    Private ReadOnly _employeeRepo As IRepository(Of EmployeeModel)
     Public Sub New(
                   workRepo As IRepository(Of WorkModel),
                   salaryRepo As IRepository(Of SalaryModel),
-                  employeeSalaryRepo As IRepository(Of EmployeeSalaryModel))
+                  employeeSalaryRepo As IRepository(Of EmployeeSalaryModel),
+                  employeeRepo As IRepository(Of EmployeeModel))
         _workRepo = workRepo
         _salaryRepo = salaryRepo
         _employeeSalaryRepo = employeeSalaryRepo
+        _employeeRepo = employeeRepo
     End Sub
 
     Public Async Function CreateNewEmployeeAsync(employee As EmployeeModel) As Task Implements IEmployeeService.CreateNewEmployeeAsync
@@ -44,7 +47,14 @@ Public Class EmployeeService
     End Function
 
     Public Async Function FindEmployeeSalaryAsync(employeeId As Integer) As Task(Of EmployeeSalaryModel) Implements IEmployeeService.FindEmployeeSalaryAsync
-        Dim salary = Await _salaryRepo.SelectQueryAsync(Of EmployeeSalaryModel)("SELECT * FROM EmployeeSalaryTable WHERE EmployeeId = @EmployeeId", New With {.EmployeeId = employeeId})
+        Dim year = DateTime.Now().Year
+        Dim salary = Await _salaryRepo.SelectQueryAsync(Of EmployeeSalaryModel)("SELECT EmployeeId, Year, SUM(NumberOfAbsent) As NumberOfAbsent, SUM(NumberOfLate) As NumberOfLate, 
+                    SUM(Allowance) As Allowance, SUM(Deductions) As Deductions, SUM(Net) As Net 
+                    FROM EmployeeSalaryTable WHERE EmployeeId = @EmployeeId AND Year = @Year GROUP BY EmployeeId, Year               
+                        ", New With {employeeId, year})
+
+        Dim employee = Await _employeeRepo.FindByIdAsync(salary.FirstOrDefault().EmployeeId)
+        salary.FirstOrDefault().SalaryId = employee.SalaryId
         Return salary.FirstOrDefault()
     End Function
 
