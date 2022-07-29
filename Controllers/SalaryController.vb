@@ -21,18 +21,29 @@ Namespace Controllers
 
         <HttpPost>
         <ValidateAntiForgeryToken>
-        Async Function Create(salary As SalaryViewModel) As Task(Of ActionResult)
-            If ModelState.IsValid Then
-                Dim salaryModel = _mapper.MapObjects(Of SalaryModel, SalaryViewModel)(New SalaryModel(), salary)
-                Await _salaryService.CreateSalaryAsync(salaryModel)
-                Return RedirectToAction(NameOf(Index))
+        Async Function CreateOrUpdate(salary As SalaryViewModel, salaryId? As Integer) As Task(Of ActionResult)
+            If ModelState.IsValid = False Then
+                Return RedirectToAction(NameOf(CreateOrUpdateForm))
             End If
 
-            Return RedirectToAction(NameOf(CreateForm))
+            Dim salaryModel = _mapper.MapObjects(Of SalaryModel, SalaryViewModel)(New SalaryModel(), salary)
+            If salaryId Is Nothing Then
+                Await _salaryService.CreateSalaryAsync(salaryModel)
+            Else
+                Await _salaryService.UpdateSalaryAsync(salaryModel)
+            End If
+
+            Return RedirectToAction(NameOf(Index))
         End Function
 
-        Function CreateForm() As ActionResult
-            Return View()
+        Async Function CreateOrUpdateForm(salaryId? As Integer) As Task(Of ActionResult)
+            Dim salaryViewModel As SalaryViewModel = Nothing
+            If salaryId IsNot Nothing Then
+                Dim salaryModel As SalaryModel = Await _salaryService.FindSalaryAsync(salaryId)
+                salaryViewModel = _mapper.MapObjects(Of SalaryViewModel, SalaryModel)(New SalaryViewModel, salaryModel)
+            End If
+
+            Return View(salaryViewModel)
         End Function
 
         Async Function Delete(salaryId? As Integer) As Task(Of ActionResult)
@@ -54,16 +65,5 @@ Namespace Controllers
             Return View(salaryViewModel)
         End Function
 
-        <HttpPost>
-        <ValidateAntiForgeryToken>
-        Async Function Update(salary As SalaryViewModel) As Task(Of ActionResult)
-            If ModelState.IsValid Then
-                Dim salaryModel = _mapper.MapObjects(Of SalaryModel, SalaryViewModel)(New SalaryModel(), salary)
-                Await _salaryService.UpdateSalaryAsync(salaryModel)
-                Return RedirectToAction(NameOf(Index))
-            End If
-
-            Return RedirectToAction(NameOf(UpdateForm))
-        End Function
     End Class
 End Namespace

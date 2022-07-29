@@ -5,7 +5,7 @@
             <h3>Create Salary</h3>
             <hr />
             <div class="shadow-sm p-4 rounded">
-                @Using (Html.BeginForm("Create", "Salary", FormMethod.Post))
+                @Using (Html.BeginForm("CreateOrUpdate", "Salary", FormMethod.Post))
                     @Html.AntiForgeryToken()
                     @<div class="form-horizontal">
                         @Html.ValidationSummary(True, "", New With {.class = "text-danger"})

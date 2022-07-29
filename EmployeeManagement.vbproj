@@ -379,8 +379,7 @@
     <Content Include="Views\Employee\_PersonalDetailPartial.vbhtml" />
     <Content Include="Views\Employee\_EmployeeSalaryPartial.vbhtml" />
     <Content Include="Views\Salary\Index.vbhtml" />
-    <Content Include="Views\Salary\CreateForm.vbhtml" />
-    <Content Include="Views\Salary\UpdateForm.vbhtml" />
+    <Content Include="Views\Salary\CreateOrUpdateForm.vbhtml" />
     <Content Include="Views\EmployeeSalary\Index.vbhtml" />
     <Content Include="Views\Employee\_SalaryPartial.vbhtml" />
     <Content Include="Views\EmployeeSalary\EmployeeSalaries.vbhtml" />
