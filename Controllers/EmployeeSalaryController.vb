@@ -42,8 +42,14 @@ Namespace Controllers
             Return RedirectToAction(NameOf(Index), New With {.employeeId = employeeId, .year = year})
         End Function
 
-        Function CreateForm(employeeId As Integer) As ActionResult
-            Return View()
+        Async Function CreateOrUpdateForm(employeeId As Integer, salaryId? As Integer) As Task(Of ActionResult)
+            If salaryId Is Nothing Then
+                Return View()
+            End If
+
+            Dim employeeSalary As EmployeeSalaryModel = Await _employeeSalaryService.FetchEmployeeSalaryAsync(employeeId)
+            Dim employeeSalaryViewModel As EmployeeSalaryViewModel = _autoMapper.MapObjects(Of EmployeeSalaryViewModel, EmployeeSalaryModel)(New EmployeeSalaryViewModel, employeeSalary)
+            Return View(employeeSalaryViewModel)
         End Function
 
         Private Function MapToDisplayEmployeeSalary(employeeSalaries As IEnumerable(Of EmployeeSalaryModel)) As List(Of DisplayEmployeeSalaryViewModel)

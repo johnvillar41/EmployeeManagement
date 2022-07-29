@@ -4,6 +4,10 @@ Public Class AutoMapper
     Implements IAutoMapper
 
     Public Function MapObjects(Of TDestination, TSource)(destinationObject As TDestination, sourceObject As TSource) As TDestination Implements IAutoMapper.MapObjects
+        If destinationObject.GetType().Equals(sourceObject.GetType()) Then
+            Throw New AutoMapperException($"TDestination({destinationObject}) and TSource({sourceObject}) are of same type!")
+        End If
+
         Dim destinationProperties = destinationObject.GetType().GetProperties()
         Dim sourceProperties = sourceObject.GetType().GetProperties()
 

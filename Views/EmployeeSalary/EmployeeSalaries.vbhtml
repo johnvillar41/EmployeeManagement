@@ -21,18 +21,15 @@
                             <p class="badge-pill badge-success badge text-truncate">Salary Implemented!</p>
                         </div>
                     End If
-                <div class="p-2">
-                    @If item.SalaryId = 0 Then
-                        @Html.ActionLink("Create Salary", "CreateForm", New With {.employeeId = item.Id}, New With {.class = "btn btn-secondary btn-block"})
-                    Else
-                        @Html.ActionLink("View Salaries", "Index", New With {.employeeId = item.Id}, New With {.class = "btn btn-secondary btn-block"})
-                        @Html.ActionLink("Update Salary", "Index", New With {.employeeId = item.Id}, New With {.class = "btn btn-secondary btn-block"})
-                    End If
-
-
+                    <div class="p-2">
+                        @If item.SalaryId = 0 Then
+                            @Html.ActionLink("Create Salary", "CreateForm", New With {.employeeId = item.Id}, New With {.class = "btn btn-secondary btn-block"})
+                        Else
+                            @Html.ActionLink("View Salaries", "Index", New With {.employeeId = item.Id}, New With {.class = "btn btn-secondary btn-block"})
+                            @Html.ActionLink("Update Salary", "Index", New With {.employeeId = item.Id}, New With {.class = "btn btn-secondary btn-block"})
+                        End If
+                    </div>
                 </div>
-                </div>
-
             </div>
         Next
     </div>
