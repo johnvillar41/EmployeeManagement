@@ -42,14 +42,28 @@ Namespace Controllers
             Return RedirectToAction(NameOf(Index), New With {.employeeId = employeeId, .year = year})
         End Function
 
-        Async Function CreateOrUpdateForm(employeeId As Integer, salaryId? As Integer) As Task(Of ActionResult)
+        Async Function CreateOrUpdateForm(employeeId? As Integer, salaryId? As Integer) As Task(Of ActionResult)
+            If employeeId Is Nothing Then
+                Return RedirectToAction(NameOf(Index))
+            End If
+
             If salaryId Is Nothing Then
-                Return View()
+                Return View(New EmployeeSalaryViewModel() With {.EmployeeId = employeeId})
+            End If
+
+            If ModelState.IsValid = False Then
+                Return RedirectToAction(NameOf(CreateOrUpdateForm))
             End If
 
             Dim employeeSalary As EmployeeSalaryModel = Await _employeeSalaryService.FetchEmployeeSalaryAsync(employeeId)
             Dim employeeSalaryViewModel As EmployeeSalaryViewModel = _autoMapper.MapObjects(Of EmployeeSalaryViewModel, EmployeeSalaryModel)(New EmployeeSalaryViewModel, employeeSalary)
             Return View(employeeSalaryViewModel)
+        End Function
+
+        Async Function CreateOrUpdate(employeeSalary As EmployeeSalaryViewModel) As Task(Of ActionResult)
+            Dim _employeeSalary As EmployeeSalaryModel = _autoMapper.MapObjects(Of EmployeeSalaryModel, EmployeeSalaryViewModel)(New EmployeeSalaryModel(), employeeSalary)
+            Await _employeeSalaryService.CreateEmployeeSalaryForEmployeeAsync(_employeeSalary)
+            Return RedirectToAction(NameOf(Index))
         End Function
 
         Private Function MapToDisplayEmployeeSalary(employeeSalaries As IEnumerable(Of EmployeeSalaryModel)) As List(Of DisplayEmployeeSalaryViewModel)

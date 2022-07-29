@@ -25,4 +25,8 @@ Public Class EmployeeSalaryService
     Public Async Function FetchEmployeeSalaryAsync(employeeId As Integer) As Task(Of EmployeeSalaryModel) Implements IEmployeeSalaryService.FetchEmployeeSalaryAsync
         Return Await _employeeService.FindEmployeeSalaryAsync(employeeId)
     End Function
+
+    Public Async Function CreateEmployeeSalaryForEmployeeAsync(employeeSalary As EmployeeSalaryModel) As Task Implements IEmployeeSalaryService.CreateEmployeeSalaryForEmployeeAsync
+        Await _employeeService.AddEmployeeSalaryAsync(employeeSalary)
+    End Function
 End Class
