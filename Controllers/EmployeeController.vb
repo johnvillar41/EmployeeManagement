@@ -83,8 +83,12 @@ Public Class EmployeeController
         Return View(NameOf(UpdateForm), employeeUpdateViewModel)
     End Function
 
-    Function CreateForm() As ActionResult
-        Return View(NameOf(CreateForm))
+    Async Function CreateForm() As Task(Of ActionResult)
+        Dim salaryTypes As IEnumerable(Of SalaryModel) = Await _employeeService.FetchSalaryTypes()
+        Dim employeeViewModel As EmployeeViewModel = New EmployeeViewModel() With {
+            .SalaryTypes = salaryTypes.Select(Function(model) _mapper.MapObjects(Of SalaryViewModel, SalaryModel)(New SalaryViewModel(), model))
+        }
+        Return View(employeeViewModel)
     End Function
 
     Async Function Detail(employeeId As Integer) As Task(Of ActionResult)
