@@ -60,6 +60,8 @@ Namespace Controllers
             Return View(employeeSalaryViewModel)
         End Function
 
+        <HttpPost>
+        <ValidateAntiForgeryToken>
         Async Function CreateOrUpdate(employeeSalary As EmployeeSalaryViewModel) As Task(Of ActionResult)
             Dim _employeeSalary As EmployeeSalaryModel = _autoMapper.MapObjects(Of EmployeeSalaryModel, EmployeeSalaryViewModel)(New EmployeeSalaryModel(), employeeSalary)
             Await _employeeSalaryService.CreateEmployeeSalaryForEmployeeAsync(_employeeSalary)
