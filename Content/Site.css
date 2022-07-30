@@ -1,3 +1,14 @@
 ﻿.card {
     border: none;
 }
+.bg-img {
+    background-image: url("/Content/Images/bg_img.jpg");
+    background-size: cover;
+    height: 80vh;
+}
+
+.card-employee {
+    background-image: url("/Content/Images/employee-card-bg.jpg");
+    background-size: cover;
+    min-height: 40vh;
+}
